@@ -17,7 +17,7 @@ body{
 .container{
   max-width: 700px;
   width: 100%;
-  min-height: 100vh; 
+  /* min-height: 100vh;  */
   height: 100%;
   background-color: #fff;
   padding: 25px 30px;
@@ -38,24 +38,24 @@ body{
   width: 30px;
   border-radius: 5px;
 }
-.content form .user-details{
+.content .div-form .user-details{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
 }
-form .user-details .input-box{
+.div-form .user-details .input-box{
   margin-bottom: 20px;
   width : 80%;
 }
-.content form .input-file .file{
+.content .div-form .input-file .file{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
 }
 
-.content form .input-image .photo{
+.content .div-form .input-image .photo{
   /* display: flex; */
   flex-wrap: wrap;
   font-weight: 500;
@@ -64,7 +64,7 @@ form .user-details .input-box{
 }
 
 
-form .user-details .input-file .file{
+.div-form .user-details .input-file .file{
     /* display: flex;
     width: 100%;
     justify-content: space-between; */
@@ -85,7 +85,7 @@ form .user-details .input-file .file{
     font-size: 16px;
     transition: all 0.3s ease;
   } */
-form .input-box div.details{
+.div-form .input-box div.details{
   display: flex;
   font-weight: 500;
   margin-bottom: 5px;
@@ -101,14 +101,16 @@ form .input-box div.details{
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
- form .button{
+ .div-form .button{
    height: 45px;
-   margin: 35px 0;  
+   margin: 60px 0;  
  } 
- form .button input{
+ .div-form .button input{
    height: 100%;
-   width: 100%;
-   border-radius: 5px;
+   width: 30%;  
+   /* display: grid; */
+   /* margin: auto; */
+   border-radius: 10px;
    border: none;
    color: #fff;
    font-size: 18px;
@@ -116,23 +118,27 @@ form .input-box div.details{
    letter-spacing: 1px;
    cursor: pointer;
    transition: all 0.3s ease;
-   background-color: #DC3545;
+   /* background-color: #DC3545; */
+    background-color: #0e6c7a;
+    /* background-color: #118baa; */
  }
- form .button input:hover{
-  background-color: #8b0b18;
+ .div-form .button input:hover{
+  /* background-color: #8b0b18; */
+  background-color: #0e6c7a;
+
   }
  @media(max-width: 584px){
  .container{
   max-width: 100%;
 }
-form .user-details .input-box{
+.div-form .user-details .input-box{
     margin-bottom: 15px;
     width: 100%;
   }
-  form .category{
+  .div-form .category{
     width: 100%;
   }
-  .content form .user-details{
+  .content .div-form .user-details{
     max-height: 300px;
     overflow-y: scroll;
   }

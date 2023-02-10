@@ -1,0 +1,31 @@
+===================================================================================================
+Algorithm:
+
+For Total Requests per minute:
+
+Step 1: Get all the data from the data database using start_date and end_data provided by user
+
+Step 2: Initialize an empty map requests_per_minute to store the count of requests made in each minute.
+
+Step 3: Iterate through all the requests in the data.
+
+Step 4: For each request, extract the minute from the request time 
+
+Step 5: If the minute is not present in the requests_per_minute map, initialize the count for that minute to 0.
+
+Step 6: If the minute is already present in the requests_per_minute map, increment the count by 1.
+
+Step 7: After iterating through all the requests, the requests_per_minute map will contain the count of requests made in each minute.
+
+Step 8: Return the requests_per_minute map as the result.
+
+===================================================================================================
+Time Complexity: 
+
+1. Iterating through data -> O(n) , where n = number of rows
+
+2. Inserting in map -> O(log(n))
+
+3. Space Complexity -> O(n)
+
+===================================================================================================
