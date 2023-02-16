@@ -3,35 +3,33 @@ import axios from 'axios'
 import '../../assets/style.css'
 
 const DocUploader = () => {
+  const [orgName, setOrgName] = React.useState('')
   const [orgEmail, setOrgEmail] = React.useState('')
   const [name, setname] = React.useState('')
-  const [photo, setPhoto] = React.useState('')
-  const [identity, setIdentity] = React.useState('')
-  const [cert, setCert] = React.useState('')
-  const [gradeCard, setGradeCard] = React.useState('')
+  const [address, setAddress] = React.useState('')
+  const [Documents, setDocuments] = React.useState([])
+  const [studentMap, setStudentMap] = React.useState([{ name: '', Documents: [] }])
+  console.log(studentMap)
 
   const handleSubmit = async () => {
     try {
-      if (orgEmail && name && photo && identity && cert && gradeCard) {
+      if (orgEmail && name && orgName && address && Documents) {
         const formData = new FormData();
+        formData.append('orgName', orgName);
         formData.append('orgEmail', orgEmail);
         formData.append('name', name);
-        formData.append('photo', photo);
-        formData.append('identity', identity);
-        formData.append('cert', cert);
-        for (let i = 0; i < gradeCard.length; i++) {
-          formData.append('gradeCard', gradeCard[i]);
+        formData.append('address', address);
+        formData.append('Documents', Documents);
+        for (let i = 0; i < Documents.length; i++) {
+          formData.append('gradeCard', Documents[i]);
         }
-        // log the form data
-        console.log(gradeCard);
-        console.log(photo);
 
         const res = await axios.post('http://localhost:5000/verification/insertstudent', formData);
         console.log(res);
-        if(res.status === 200){
+        if (res.status === 200) {
           alert('Student added successfully')
         }
-        else{
+        else {
           alert('Error in adding student')
         }
       }
@@ -50,69 +48,53 @@ const DocUploader = () => {
           <div className='div-form'>
             <div className="user-details">
               <div className="input-box">
+                <div className="details">Name of Agency</div>
+                <input type="text" placeholder="Enter name of agency" required value={orgName} onChange={(e) => setOrgName(e.target.value)} />
+              </div>
+              <div className="input-box">
                 <div className="details">Email of Agency</div>
                 <input type="text" placeholder="Enter your email" required value={orgEmail} onChange={(e) => setOrgEmail(e.target.value)} />
               </div>
               <div className="input-box">
+                <div className="details">Address</div>
+                <textarea placeholder="Enter your Address" required value={address} onChange={(e) => setAddress(e.target.value)} />
+              </div>
+              <hr style={{width:'100%', textAlign:'left'}}/>
+              {/* <div className="input-box">
                 <div className="details">Name of Student</div>
                 <input type="text" placeholder="Enter student name" required value={name} onChange={(e) => setname(e.target.value)} />
               </div>
               <div className="input-image">
-                <div className="photo">Passport size photo</div>
-                <input type="file" accept='image/*' required onChange={(e) => setPhoto(e.target.files[0])} />
-              </div>
-              <div className="input-image">
-                <div className="photo">Proof of identity</div>
-                <input type="file" required  onChange={(e) => setIdentity(e.target.files[0])} />
-              </div>
-              <div className="input-image">
-                <div className="photo">Degree certificate</div>
-                <input type="file" required onChange={(e) => setCert(e.target.files[0])} />
-              </div>
-              <div className="input-image">
-                <div className="photo">Grade cards (All 8 semesters)</div>
-                {/* <input type="file" required/> */}
-                {/* <div style={{ fontWeight: "500" }}>Grade cards (All 8 semesters)</div> */}
-                <input type="file" required onChange={(e) => setGradeCard(e.target.files)} multiple />
+                <div className="photo">Documents (Minimum 8 documents)</div>
+                <input type="file" required onChange={(e) => setDocuments(e.target.files)} multiple />
+              </div> */}
+              {studentMap.map((student, index) => {
+                return (
+                  // padding in responsive terms
+                  <div key={index} style={{padding:'18px 0 0 0', width:'100%'}}>
+                    <div className="input-box">
+                      <div className="details">Name of Student</div>
+                      <input type="text" placeholder="Enter student name" required value={student.name} onChange={(e) => setStudentMap(studentMap.map((student, i) => i === index ? { ...student, name: e.target.value } : student))} />
+                    </div>
+                    <div className="input-image">
+                      <div className="photo">Documents</div>
+                      <input type="file" required onChange={(e) => setStudentMap(studentMap.map((student, i) => i === index ? { ...student, Documents: e.target.files } : student))} multiple />
+                    </div>
+                    {studentMap.length > 1 &&
+                      <div className="button">
+                        <input type="submit" value="Remove" onClick={() => setStudentMap(studentMap.filter((student, i) => i !== index))} />
+                      </div>
+                    }
+                    <br />
+                    <hr style={{width:'100%', textAlign:'left'}}/>
+                  </div>
 
-              </div>
-              {/* <div className="input-file">
-                <div className="file">I</div>
-                append this to GradeCard
-                <input type="file" required onChange={(e) => setGradeCard(e.target.files)} multiple />
-              </div> */}
-              {/* <div className="input-file">
-                <div className="file">II</div>
-                <input type="file"  />
-              </div>
-              <div className="input-file">
-                <div className="file">III</div>
-                <input type="file" />
-              </div>
-              <div className="input-file">
-                <div className="file">IV</div>
-                <input type="file" />
-              </div>
-              <div className="input-file">
-                <div className="file">V</div>
-                <input type="file"  />
-              </div>
-              <div className="input-file">
-                <div className="file">VI</div>
-                <input type="file" />
-              </div>
-              <div className="input-file">
-                <div className="file">VII</div>
-                <input type="file"  />
-              </div>
-              <div className="input-file">
-                <div className="file">VIII</div>
-                <input type="file" />
-              </div> */}
+                )
+              })}
             </div>
-            {/* <div className="button">
-              <input type="submit" value="Add student" />
-            </div> */}
+            <div className="button">
+              <input type="submit" value="Add student" onClick={() => setStudentMap([...studentMap, { name: '', Documents: [] }])} />
+            </div>
             <div className="button">
               <input type="submit" value="Submit" onClick={handleSubmit} />
             </div>
