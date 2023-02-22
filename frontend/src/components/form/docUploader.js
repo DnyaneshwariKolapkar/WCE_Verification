@@ -5,24 +5,25 @@ import '../../assets/style.css'
 const DocUploader = () => {
   const [orgName, setOrgName] = React.useState('')
   const [orgEmail, setOrgEmail] = React.useState('')
-  const [name, setname] = React.useState('')
   const [address, setAddress] = React.useState('')
-  const [Documents, setDocuments] = React.useState([])
   const [studentMap, setStudentMap] = React.useState([{ name: '', Documents: [] }])
   console.log(studentMap)
 
   const handleSubmit = async () => {
     try {
-      if (orgEmail && name && orgName && address && Documents) {
+      if (orgEmail && orgName && address && studentMap.length > 0) {
         const formData = new FormData();
         formData.append('orgName', orgName);
         formData.append('orgEmail', orgEmail);
-        formData.append('name', name);
         formData.append('address', address);
-        formData.append('Documents', Documents);
-        for (let i = 0; i < Documents.length; i++) {
-          formData.append('gradeCard', Documents[i]);
-        }
+        formData.append('studentCount', studentMap.length);
+        studentMap.forEach((student, index) => {
+          formData.append(`name${index}`, student.name);
+          for (let i = 0; i < student.Documents.length; i++) {
+            formData.append(`Documents${index}`, student.Documents[i]);
+          }
+
+        })
 
         const res = await axios.post('http://localhost:5000/verification/insertstudent', formData);
         console.log(res);
@@ -43,6 +44,8 @@ const DocUploader = () => {
   return (
     <>
       <div className="container">
+        <div class="PrevNext">
+        </div>
         <div className="title">Document upload form</div>
         <div className="content">
           <div className='div-form'>
@@ -59,19 +62,11 @@ const DocUploader = () => {
                 <div className="details">Address</div>
                 <textarea placeholder="Enter your Address" required value={address} onChange={(e) => setAddress(e.target.value)} />
               </div>
-              <hr style={{width:'100%', textAlign:'left'}}/>
-              {/* <div className="input-box">
-                <div className="details">Name of Student</div>
-                <input type="text" placeholder="Enter student name" required value={name} onChange={(e) => setname(e.target.value)} />
-              </div>
-              <div className="input-image">
-                <div className="photo">Documents (Minimum 8 documents)</div>
-                <input type="file" required onChange={(e) => setDocuments(e.target.files)} multiple />
-              </div> */}
+              <hr style={{ width: '100%', textAlign: 'left' }} />
               {studentMap.map((student, index) => {
                 return (
                   // padding in responsive terms
-                  <div key={index} style={{padding:'18px 0 0 0', width:'100%'}}>
+                  <div key={index} style={{ padding: '18px 0 0 0', width: '100%' }}>
                     <div className="input-box">
                       <div className="details">Name of Student</div>
                       <input type="text" placeholder="Enter student name" required value={student.name} onChange={(e) => setStudentMap(studentMap.map((student, i) => i === index ? { ...student, name: e.target.value } : student))} />
@@ -80,22 +75,20 @@ const DocUploader = () => {
                       <div className="photo">Documents</div>
                       <input type="file" required onChange={(e) => setStudentMap(studentMap.map((student, i) => i === index ? { ...student, Documents: e.target.files } : student))} multiple />
                     </div>
-                    {studentMap.length > 1 &&
-                      <div className="button">
-                        <input type="submit" value="Remove" onClick={() => setStudentMap(studentMap.filter((student, i) => i !== index))} />
-                      </div>
+                    {
+                      studentMap.length > 1 &&
+                      <button className="button_plus" onClick={() => setStudentMap(studentMap.filter((student, i) => i !== index))} />
                     }
                     <br />
-                    <hr style={{width:'100%', textAlign:'left'}}/>
+                    <hr style={{ width: '100%', textAlign: 'left' }} />
                   </div>
-
                 )
               })}
             </div>
             <div className="button">
               <input type="submit" value="Add student" onClick={() => setStudentMap([...studentMap, { name: '', Documents: [] }])} />
             </div>
-            <div className="button">
+            <div className="button_submit">
               <input type="submit" value="Submit" onClick={handleSubmit} />
             </div>
           </div>
