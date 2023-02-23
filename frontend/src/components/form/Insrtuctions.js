@@ -5,8 +5,8 @@ const Insrtuctions = () => {
   return (
     <>
      <div className='procedure'>
-        <h3>Procedure for obtaining verification letter</h3>
-        {/* <div className='DOCUMENTS'>
+        <h3>Procedure for verification</h3>
+        <div className='DOCUMENTS'>
           <ol>
             <li>
               Candidate needs to submit filled application along with required
@@ -22,12 +22,12 @@ const Insrtuctions = () => {
             </li>
             <li>
               <b>
-                The fee for transcript is Rs.700/-(Rupees Seven Hundred only)
-                per transcript
+                The fee for verification is Rs.900/-(Rupees Seven Hundred only)
+                per student
               </b>
             </li>
           </ol>
-        </div> */}
+        </div>
         </div>
     </>
   )

@@ -30,7 +30,7 @@ exports.insertStudent =
     }
     const students = [];
     for (let i = 0; i < req.body.studentCount; i++) {
-      const number = `studentName${i}`;
+      const number = `name${i}`;
       const student = new Student({
         orgName: req.body.orgName,
         orgEmail: req.body.orgEmail,
@@ -38,6 +38,7 @@ exports.insertStudent =
         name: req.body[number],
         documents: documents.get(i),
       });
+      console.log(req.body);
       students.push(student);
     }
     await Student.insertMany(students);

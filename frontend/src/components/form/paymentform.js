@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../assets/style.css'
 import { useState } from 'react';
 
 const Paymentform = () => {
@@ -60,9 +61,32 @@ const Paymentform = () => {
 
 return (
     <>
-        <h1>Payment form</h1>
-        <button disabled={loading} onClick={handlePayment} >Pay</button>
-        {loading && <p>Processing...</p>}
+        <br />
+        <div className="container" >
+        <div className="title">Payment form</div>
+        <div className="content">
+          <div className='div-form'>
+            <div className="user-details">
+              <div className="input-box">
+                <div className="details">Total Number of Students</div>
+                <input type="number" placeholder="" required  style={{width:"30%"}}/>
+              </div>
+              <div className="input-box">
+                <div className="details">Total Amount (900<span>&#215;</span>Total no of students)</div>
+                <input type="number" placeholder="Total amount" required  style={{width:"30%"}}/>
+              </div>
+              <hr style={{ width: '100%', textAlign: 'left' }} />
+            </div>
+            {/* <button classname="button" disabled={loading} onClick={handlePayment} >Pay</button>
+        {loading && <p>Processing...</p>} */}
+        <div className="button">
+              <input type="submit" value="Pay" disabled={loading} onClick={handlePayment}/>
+              {loading && <p>Processing...</p>}
+            </div>
+          </div>
+        </div>
+      </div>
+        
     </>
 )
 }

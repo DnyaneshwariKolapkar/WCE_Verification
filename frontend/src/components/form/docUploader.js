@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import '../../assets/style.css'
 
 const DocUploader = () => {
@@ -8,6 +9,7 @@ const DocUploader = () => {
   const [address, setAddress] = React.useState('')
   const [studentMap, setStudentMap] = React.useState([{ name: '', Documents: [] }])
   console.log(studentMap)
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
@@ -15,7 +17,7 @@ const DocUploader = () => {
         const formData = new FormData();
         formData.append('orgName', orgName);
         formData.append('orgEmail', orgEmail);
-        formData.append('address', address);
+        formData.append('orgAddress', address);
         formData.append('studentCount', studentMap.length);
         studentMap.forEach((student, index) => {
           formData.append(`name${index}`, student.name);
@@ -43,9 +45,8 @@ const DocUploader = () => {
 
   return (
     <>
+      <br />
       <div className="container">
-        <div class="PrevNext">
-        </div>
         <div className="title">Document upload form</div>
         <div className="content">
           <div className='div-form'>
@@ -94,6 +95,7 @@ const DocUploader = () => {
           </div>
         </div>
       </div>
+      <br />
     </>
   )
 }

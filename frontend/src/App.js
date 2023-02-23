@@ -1,16 +1,15 @@
 import React from 'react';
-import DocUploader from './components/form/docUploader';
-// import Paymentform from './components/form/paymentform';
-// import Insrtuctions from './components/form/Insrtuctions';
+import Router from './router';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <>
-      <DocUploader />
-      {/* <Insrtuctions /> */}
-      {/* <Paymentform /> */}
+      <BrowserRouter />
+      <Router />
+      <BrowserRouter />
     </>
-    
+
   );
 }
 

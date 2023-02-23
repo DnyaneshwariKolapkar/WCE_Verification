@@ -262,16 +262,17 @@ textarea {
     margin: 0;
     padding: 3rem;
     font-size: 1.3rem;
-    background-color: #d7e7f8;
+    /* background-color: #d7e7f8; */
   }
   
   .DOCUMENTS {
     font-size: medium;
-    border-radius: 1.3rem;
-    background-color: #edf4fc;
+    border-radius: 1rem;
+    background-color: #d3dce7;
     padding: 2rem;
-    box-shadow: 8px 10px rgba(136, 136, 136, 0.2);
-    line-height: 2.5rem;
+    /* box-shadow: 8px 10px rgba(136, 136, 136, 0.2); */
+    line-height: 3.5rem;
+    width:60%;
     display: flex;
     flex-wrap: wrap;
   }
