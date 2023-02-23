@@ -3,27 +3,23 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const studentSchema = new schema({
+    orgName: {
+        type: String,
+        required: [true, "Organization Name is required"],
+    },
     orgEmail: {
         type: String,
         required: [true, "Email is required"],
+    },
+    orgAddress: {
+        type: String,
+        required: [true, "Address is required"],
     },
     name: {
         type: String,
         required: [true, "Name is required"],
     },
-    photo: {
-        type: String,
-        required: [true, "Photo is required"],
-    },
-    identity: {
-        type: String,
-        required: [true, "Identity is required"],
-    },
-    cert: {
-        type: String,
-        required: [true, "Cert is required"],
-    },
-    gradeCards: {
+    documents: {
         type: [String],
         required: [true, "Grade Cards are required"],
     }

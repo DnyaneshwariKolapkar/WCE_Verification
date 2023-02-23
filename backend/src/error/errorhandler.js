@@ -7,7 +7,6 @@ exports.trycatch = (controller) => async (req, res, next) => {
 };
 
 exports.errorHandler = (err, req, res, next) => {
-    console.log(err);
     return res.status(500).json({
         error: err.message,
         message: "Something went wrong",
