@@ -31,11 +31,14 @@ const DocUploader = () => {
         console.log(res);
         if (res.status === 200) {
           alert('Student added successfully')
+          navigate("/payment")
         }
         else {
           alert('Error in adding student')
         }
       }
+      else
+        alert('Please fill all the fields')
     }
     catch (err) {
       console.log(err);

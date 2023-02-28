@@ -5,6 +5,120 @@
   box-sizing: border-box;
   font-family: 'Poppins',sans-serif;
 }
+
+.Header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 0.9rem;
+  width:100%;
+  background-color: #FFFFFF;
+  /* background-color: #0d0f13; */
+  height: 100px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+}
+
+.login-form {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #edf4fc;
+}
+
+.login-form > h2 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.form {
+  border: 5px solid #d7e7f8;
+  padding: 4rem;
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  /* border-radius: 2rem; */
+  background-color: white;
+  /* border-radius: 30px; */
+  background: #ffffff;
+}
+
+.form > h2 {
+  margin: 0px;
+  font-weight: 500;
+  padding: 0;
+}
+
+.innerDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 20rem;
+  /* margin-top: 1rem;
+  margin-bottom: 1rem; */
+}
+
+.innerDiv > input {
+  border-radius: 0.5rem;
+  height: 2rem;
+  border: 0.1rem solid rgb(157, 186, 249);
+}
+
+.innerDiv > input:hover {
+  background-color: #d7e7f8;
+}
+
+/* incomplete task */
+.innerDiv > input:active {
+  background-color: #d7e7f8;
+  border: 0.1rem solid rgb(126, 167, 255);
+}
+
+.submitbtn {
+  font-size: 1.2rem;
+  width: 10rem;
+  text-align: center;
+  background-color: #e30a0a;
+  border: none;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+.submitbtn:hover {
+  background-color: #b20707;
+  cursor: pointer;
+}
+
+.innerDiv > input {
+  font-size: 1rem;
+  padding: 0.3rem;
+  border-radius: 12px;
+  background: #ffffff;
+}
+.image {
+  height: 9rem;
+  width: auto;
+  margin-top: 1rem;
+}
+
 body{
   height: 100%;
   width: 100%;
@@ -108,27 +222,29 @@ body{
   background-color: #0e6c7a;
 
   }
+
  @media(max-width: 584px){
- .container{
+ .container .DOCUMENTS{
   max-width: 100%;
 }
+
 .div-form .user-details .input-box{
     margin-bottom: 15px;
     width: 100%;
   }
-  .div-form .category{
+  .div-form .category .DOCUMENTS{
     width: 100%;
   }
-  .content .div-form .user-details{
+  .content .div-form .user-details .DOCUMENTS{
     max-height: 300px;
     overflow-y: scroll;
   }
-  .user-details::-webkit-scrollbar{
+  .user-details::-webkit-scrollbar .DOCUMENTS{
     width: 5px;
   }
   }
   @media(max-width: 459px){
-  .container .content .category{
+  .container .content .category .DOCUMENTS{
     flex-direction: column;
   }
 }
@@ -217,7 +333,7 @@ textarea {
   margin: 50px 0; 
   /* padding-left: 350px; */
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .div-form .button_submit input{
@@ -268,11 +384,41 @@ textarea {
   .DOCUMENTS {
     font-size: medium;
     border-radius: 1rem;
-    background-color: #d3dce7;
+    /* background-color: #d3dce7; */
+    background-color: #fff;
     padding: 2rem;
     /* box-shadow: 8px 10px rgba(136, 136, 136, 0.2); */
-    line-height: 3.5rem;
-    width:60%;
+    line-height: 2.5rem;
+    width:100%;
+    height: 100%;
+    max-width: 700px;
     display: flex;
     flex-wrap: wrap;
+  }
+  
+  .DOCUMENTS .button_next{
+    height: 45px;
+    margin: 30px 0;  
+    /* padding-right: 55px; */
+  } 
+
+  .DOCUMENTS .button_next input{
+    height: 100%;
+    width: 170%; 
+    justify-content: flex-end; 
+    /* display: grid; */
+    /* margin: auto; */
+    /* border-radius: 20px; */
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* background-color: #DC3545; */
+     /* background-color: #0e6c7a; */
+     /* background-color: #118baa; */
+     /* background-color: #118baa; */
+     background-color: #4682B4;
   }
