@@ -5,12 +5,21 @@ const trycatch = require("../error/errorhandler").trycatch;
 // ------------ POST REQUEST : /verification/admin/allreq ------------ //
 
 exports.getApis = trycatch(async (req, res) => {
+    const companies = await Company.find();
+    res.status(200).json({
+        status: "success",
+        data: companies
+    });
+});
+
+
+// ------------ POST REQUEST : /verification/admin/pendingreq ------------ //
+
+exports.getPendingApis = trycatch(async (req, res) => {
     const companies = await Company.find({ isVerified: false });
     res.status(200).json({
         status: "success",
-        data: {
-            companies,
-        },
+        data: companies
     });
 });
 

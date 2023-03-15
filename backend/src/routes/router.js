@@ -15,6 +15,11 @@ router.get(
     veryficationController.getApis
 );
 
+router.get(
+    '/verification/admin/pedningreq',
+    veryficationController.getPendingApis
+)
+
 router.post(
     '/verification/admin/getstudents',
     veryficationController.getStudents
