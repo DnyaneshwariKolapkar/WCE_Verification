@@ -15,6 +15,10 @@ const studentSchema = new schema({
         type: String,
         required: [true, "Address is required"],
     },
+    unqId: {
+        type: String,
+        required: [true, "Students Id is required"],
+    },
     name: {
         type: String,
         required: [true, "Name is required"],

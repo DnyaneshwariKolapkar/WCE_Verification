@@ -1,4 +1,5 @@
 const Student = require("../models/student");
+const Company = require("../models/company");
 const multer = require("multer");
 const trycatch = require("../error/errorhandler").trycatch;
 const crypto = require("crypto");
@@ -17,33 +18,38 @@ const storage = multer.diskStorage({
 });
 exports.upload = multer({ storage: storage });
 
-exports.insertStudent =
-  trycatch ( async (req, res) => {
-    const documents = new Map();
-    for (let i = 0; i < req.files.length; i++) {
-      const index = parseInt(req.files[i].fieldname.split("studentDocument")[1]);
-      if (documents.has(index)) {
-        documents.get(index).push(req.files[i].filename);
-      } else {
-        documents.set(index, [req.files[i].filename]);
-      }
+exports.insertStudent = trycatch (async (req, res) => {
+  const documents = new Map();
+  for (let i = 0; i < req.files.length; i++) {
+    const index = parseInt(req.files[i].fieldname.split("Documents")[1]);
+    if (documents.has(index)) {
+      documents.get(index).push(req.files[i].filename);
+    } else {
+      documents.set(index, [req.files[i].filename]);
     }
-    const students = [];
-    for (let i = 0; i < req.body.studentCount; i++) {
-      const number = `name${i}`;
-      const student = new Student({
-        orgName: req.body.orgName,
-        orgEmail: req.body.orgEmail,
-        orgAddress: req.body.orgAddress,
-        name: req.body[number],
-        documents: documents.get(i),
-      });
-      console.log(req.body);
-      students.push(student);
-    }
-    await Student.insertMany(students);
-    res.status(200).json({
-      status: "success",
-      message: "Students inserted successfully",
-    });
+  }
+  const company = new Company({
+    email: req.body.orgEmail,
+    studentsCount: req.body.studentCount,
   });
+  const students = [];
+  console.log(req.body);
+  for (let i = 0; i < req.body.studentCount; i++) {
+    const number = `name${i}`;
+    const student = new Student({
+      orgName: req.body.orgName,
+      orgEmail: req.body.orgEmail,
+      orgAddress: req.body.orgAddress,
+      unqId: company._id,
+      name: req.body[number],
+      documents: documents.get(i),
+    });
+    students.push(student);
+  }
+  await Student.insertMany(students);
+  await company.save();
+  res.status(200).json({
+    status: "success",
+    message: "Students inserted successfully",
+  });
+});

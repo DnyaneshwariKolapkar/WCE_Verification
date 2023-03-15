@@ -7,7 +7,7 @@ const error = require('./error/errorhandler');
 require('dotenv').config();
 require('./db/connect');
 
-app.use("/data", Express.static(__dirname + "/public/students"));
+app.use("/document", Express.static(__dirname + "/public/students"));
 
 app.use(cors());
 app.use(Express.json());
