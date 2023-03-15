@@ -16,7 +16,7 @@ router.get(
 );
 
 router.get(
-    '/verification/admin/pedningreq',
+    '/verification/admin/pendingreq',
     veryficationController.getPendingApis
 )
 
