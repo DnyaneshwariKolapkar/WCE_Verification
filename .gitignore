@@ -4,3 +4,4 @@ backend/.env
 backend/package-lock.json
 frontend/package-lock.json
 backend/public
+frontend/public/wcelogo.png

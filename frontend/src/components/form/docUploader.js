@@ -48,7 +48,8 @@ const DocUploader = () => {
 
   return (
     <>
-      <br />
+      {/* <br /> */}
+      <div className='main-body'>
       <div className="container">
         <div className="title">Document upload form</div>
         <div className="content">
@@ -98,7 +99,8 @@ const DocUploader = () => {
           </div>
         </div>
       </div>
-      <br />
+      </div>
+      {/* <br /> */}
     </>
   )
 }

@@ -6,6 +6,7 @@ const Insrtuctions = () => {
   const navigate = useNavigate();
   return (
     <>
+    <div className='main-body'>
       <div className='procedure'>
         <h3>Procedure for Verification</h3>
         <div className='DOCUMENTS'>
@@ -43,6 +44,7 @@ const Insrtuctions = () => {
               <input type="submit" value="Next" onClick={ ()=> navigate("/DocUploader")}/>
             </div>
         </div>
+      </div>
       </div>
     </>
   )

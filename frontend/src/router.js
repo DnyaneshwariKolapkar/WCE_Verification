@@ -4,16 +4,35 @@ import DocUploader from './components/form/docUploader'
 import Insrtuctions from './components/form/Insrtuctions'
 import Paymentform from './components/form/paymentform'
 import Login from './components/form/Login'
+import Sidebar from './components/form/Sidebar'
+import Allreq from './pages/Allreq'
+import Analytics from './pages/Analytics'
+import Pendingreq from './pages/pendingreq'
+import Transactions from './pages/Transactions'
+import ManageUser from './pages/ManageUser'
+import ForgotPassword from './components/form/ForgotPassword'
+import ResetPassword from './components/form/ResetPassword'
+
 
 const Router = () => {
     return (
         <>
+
             <Routes>
-                {/* <Route path="/" element={<DocUploader />} /> */}
-                <Route path='/' element={<Insrtuctions />} />
+                <Route path="/client" element={<Insrtuctions />} />
                 <Route path='/DocUploader' element={<DocUploader />} />
                 <Route path='/payment' element={<Paymentform />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/forgotpassword' element={<ForgotPassword />} />
+                <Route path='/resetpassword' element={<ResetPassword />} />
+                <Route path='/sidebar' element={<Sidebar />} >
+                    <Route path="" element={<Pendingreq />} />
+                    <Route path="pendingreq" element={<Pendingreq />} />
+                    <Route path="allreq" element={<Allreq />} />
+                    <Route path="transactions" element={<Transactions />} />
+                    <Route path="analytics" element={<Analytics />} />
+                    <Route path="manageuser" element={<ManageUser />} />
+                </Route>
             </Routes>
         </>
     )

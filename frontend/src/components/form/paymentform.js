@@ -61,7 +61,8 @@ const Paymentform = () => {
 
 return (
     <>
-        <br />
+        {/* <br /> */}
+        <div className='main-body'>
         <div className="container" >
         <div className="title">Payment form</div>
         <div className="content">
@@ -86,7 +87,7 @@ return (
           </div>
         </div>
       </div>
-        
+      </div>
     </>
 )
 }
