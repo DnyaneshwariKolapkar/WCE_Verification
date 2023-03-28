@@ -31,9 +31,7 @@ exports.getStudents = trycatch(async (req, res) => {
     const students = await Student.find({ unqId: req.body.unqId })
     res.status(200).json({
         status: "success",
-        data: {
-            students,
-        },
+        data: students,
     });
 });
 

@@ -26,7 +26,11 @@ const studentSchema = new schema({
     documents: {
         type: [String],
         required: [true, "Grade Cards are required"],
-    }
+    },
+    isVerified: {
+        type: Boolean,
+        default: false,
+    },
 })   
 
 const Student = mongoose.model('Student', studentSchema);
