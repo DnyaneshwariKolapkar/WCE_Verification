@@ -12,6 +12,7 @@ import Transactions from './pages/Transactions'
 import ManageUser from './pages/ManageUser'
 import ForgotPassword from './components/form/ForgotPassword'
 import ResetPassword from './components/form/ResetPassword'
+import Pendingstudents from './pages/pendingstudents'
 
 
 const Router = () => {
@@ -24,10 +25,13 @@ const Router = () => {
                 <Route path='/payment' element={<Paymentform />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/forgotpassword' element={<ForgotPassword />} />
-                <Route path='/resetpassword' element={<ResetPassword />} />
+                <Route path='/resetpassword/:id/:token' element={<ResetPassword />} />
+                {/* <Route path='/resetpassword/:id/:token' element={<ResetPassword />} /> */}
                 <Route path='/sidebar' element={<Sidebar />} >
                     <Route path="" element={<Pendingreq />} />
-                    <Route path="pendingreq" element={<Pendingreq />} />
+                    <Route path="pendingreq" element={<Pendingreq />} >
+                        <Route path="pendingstudents" element={<Pendingstudents />} />
+                    </Route>
                     <Route path="allreq" element={<Allreq />} />
                     <Route path="transactions" element={<Transactions />} />
                     <Route path="analytics" element={<Analytics />} />

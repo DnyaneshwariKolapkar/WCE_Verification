@@ -1,10 +1,38 @@
 import React from 'react'
 import '../../assets/style.css'
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
 
+    const [email, setEmail] = React.useState('');
     const navigate = useNavigate();
+
+    const submitButton = async() => {
+        try {
+            if (email) {
+                const user = {
+                    email: email
+                }
+                const res = await axios.post('http://localhost:5000/verification/resetpassword', user);
+                console.log(res.data);
+                if (res.status === 200) {
+                    alert("Password reset link sent to your email");
+                    // navigate('/login');
+                }
+                else {
+                    console.log(res);
+                }
+            }
+            else {
+                alert("Please enter all fields");
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <div className='Header'>
@@ -31,6 +59,8 @@ const ForgotPassword = () => {
                             id='username'
                             placeholder=' Enter your e-mail'
                             name='username'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     {/* <div className='innerDiv'>
@@ -42,7 +72,7 @@ const ForgotPassword = () => {
               placeholder=' Enter your password' 
             />
           </div> */}
-                    <button type='submit' className='submitbtn' style={{}}>
+                    <button type='submit' className='submitbtn' onClick={submitButton}>
                         Continue
                     </button>
                     <p style={{ textAlign: 'center', marginBlockStart: '0rem' }}>Please enter your registered E-mail</p>

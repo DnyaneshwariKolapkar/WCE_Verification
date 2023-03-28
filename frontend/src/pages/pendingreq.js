@@ -1,8 +1,10 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, } from 'react';
+import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 const Pendingreq = () => {
+    const navigate = useNavigate();
 
     const [data, setData] = useState([])
     useEffect(() => {
@@ -30,7 +32,7 @@ const Pendingreq = () => {
                     </li>
                     {data.map((item, index) => {
                         return (
-                            <li className="table-row" key={index}>
+                            <li className="table-row" onClick={() => navigate('pendingstudents')} key={index}>
                                 <div className="col col-1" data-label="Sr no">{index + 1}</div>
                                 <div className="col col-2" data-label="Company Email">{item.email}</div>
                                 <div className="col col-3" data-label="Student Count">{item.studentsCount}</div>

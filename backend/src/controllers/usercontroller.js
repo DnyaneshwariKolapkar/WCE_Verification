@@ -54,12 +54,13 @@ exports.login = trycatch(async (req, res) => {
 // ------------ POST REQUEST : /verification/admin/createuser ------------ //
 
 exports.createUser = trycatch(async (req, res) => {
-    if (req.user.role !== 'admin') {
-        throw new Error('Unauthorized');
-    }
+    // if (req.user.role !== 'admin') {
+    //     throw new Error('Unauthorized');
+    // }
     const { email, password } = req.body;
+    console.log(req.body);
     const user = await User.find({ email });
-    if (user.length > 0) {
+    if (user.length) {
         throw new Error('User already exists');
     }
     const newUser = new User({ email, password });
