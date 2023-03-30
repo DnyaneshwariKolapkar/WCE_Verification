@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Allreq = () => {
+    const navigate = useNavigate();
+
     const [data, setData] = useState([])
     useEffect(() => {
         const requestData = async () => {
@@ -29,7 +32,7 @@ const Allreq = () => {
                     </li>
                     {data.map((item, index) => {
                         return (
-                            <li className="table-row" key={index}>
+                            <li className="table-row" onClick={() => navigate('pendingstudents', { state: { unqId: item._id } })} key={index}>
                                 <div className="col col-1" data-label="Sr no">{index + 1}</div>
                                 <div className="col col-2" data-label="Company Email">{item.email}</div>
                                 <div className="col col-3" data-label="Student Count">{item.studentsCount}</div>

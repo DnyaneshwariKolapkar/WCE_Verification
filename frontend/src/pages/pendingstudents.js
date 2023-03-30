@@ -1,26 +1,32 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Pendingstudents = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const unqId = location?.state?.unqId;
 
-    // const [data, setData] = useState([])
-    // useEffect(() => {
-    //     const requestData = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:5000/verification/admin/getstudents')
-    //             if (response.status === 200) {
-    //                 setData(response.data.data)
-    //             }
-    //         } catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    //     requestData()
-    // }, [])
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        const requestData = async () => {
+            try {
+                const response = await axios.post('http://localhost:5000/verification/admin/getstudents', {
+                    unqId: unqId
+                })
+                if (response.status === 200) {
+                    setData(response.data.data);
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        requestData()
+    }, [])
     return (
         <>
-            {/* <div className="container-table">
+            <div className="container-table">
                 <ul className="responsive-table">
                     <li className="table-header">
                         <div className="col col-1">Sr no</div>
@@ -29,7 +35,7 @@ const Pendingstudents = () => {
                     </li>
                     {data.map((item, index) => {
                         return (
-                            <li className="table-row" key={index}>
+                            <li className="table-row" onClick={() => navigate('view', { state: { documents: data[index].documents } })} key={index}>
                                 <div className="col col-1" data-label="Sr no">{index + 1}</div>
                                 <div className="col col-2" data-label="Student Name">{item.name}</div>
                                 {item.isVerified && <div className="col col-3" data-label="Status" style={{ color: "green" }}>Verified</div>}
@@ -39,10 +45,10 @@ const Pendingstudents = () => {
                     })}
 
                 </ul>
-            </div> */}
-            <h1>
+            </div>
+            {/* <h1>
                 Pending Student
-            </h1>
+            </h1> */}
         </>
     );
 };
