@@ -51,7 +51,7 @@ const Login = () => {
       <div className='login-form'>
         <h2>Welcome to Verification Portal</h2>
         <div className='form'>
-          <h2 style={{ textAlign: 'center', marginBlockStart: '0rem' }}>
+          <h2 style={{ textAlign: 'start', marginBlockStart: '0rem' }}>
             Sign in
           </h2>
           <div className='innerDiv'>
