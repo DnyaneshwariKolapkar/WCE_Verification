@@ -1,4 +1,3 @@
-const { parse } = require('dotenv');
 const Express = require('express');
 const router = Express.Router();
 const studentController = require('../controllers/studentcontroller');
