@@ -81,15 +81,14 @@ const Login = () => {
           <button type='submit' className='submitbtn' onClick={submitButton}>
             Login
           </button>
-          <a
-            href=''
-            style={{ color: 'blue', textDecoration: 'none' }}
+          <p
+            style={{ color: 'blue', textDecoration: 'none', cursor: 'pointer' }}
             onClick={() => {
               navigate('/forgotpassword')
             }}
           >
             Forgot Password
-          </a>
+          </p>
         </div>
       </div>
     </>

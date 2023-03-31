@@ -1,13 +1,11 @@
 import React from 'react'
 import '../../assets/style.css'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { Images } from "../../context/images"
 
 const ForgotPassword = () => {
 
     const [email, setEmail] = React.useState('');
-    const navigate = useNavigate();
 
     const submitButton = async() => {
         try {

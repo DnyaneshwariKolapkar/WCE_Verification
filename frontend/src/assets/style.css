@@ -610,7 +610,8 @@ main{
 .sidebar{
   background: #222E3C;
   color: #fff;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 200px;
   transition: all 0.5s;
 }
