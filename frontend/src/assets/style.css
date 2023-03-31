@@ -18,7 +18,7 @@
   /* width:100%; */
   background-color: #FFFFFF;
   /* background-color: #0d0f13; */
-  height: 200px;
+  height: 250px;
   /* position: fixed; */
   /* top: 0;
   left: 0;
@@ -50,7 +50,7 @@
 }
 
 .form {
-  border: 5px solid #ffffff;
+  border: 3px solid #dbe8ee;
   padding: 4rem;
   padding-top: 2.5rem;
   padding-bottom: 3rem;
@@ -59,9 +59,8 @@
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  /* border-radius: 2rem; */
+  border-radius: 10px;
   background-color: white;
-  /* border-radius: 15px; */
   background: #ffffff;
 }
 
@@ -98,13 +97,13 @@
 
 .submitbtn {
   font-size: 1.2rem;
-  width: 10rem;
+  width: 8rem;
   text-align: center;
   /* background-color: #e30a0a; */
   background-color: #ffffff;
   border: 0.1rem solid #b20707;
   padding: 0.4rem;
-  border-radius: 1rem;
+  border-radius: 10px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   /* color: white; */
@@ -113,21 +112,22 @@
 }
 
 .submitbtn:hover {
-  /* background-color: #b20707; */
+  background-color: #b20707;
   cursor: pointer;
+  color: #ffffff;
 }
 
 .innerDiv > input {
   font-size: 1rem;
   padding: 0.3rem;
-  border-radius: 12px;
+  border-radius: 10px;
   background: #ffffff;
 }
 .image {
   height: 10rem;
   width: auto;
-  margin-top: 1rem;
-  margin: 0px 690px 10px;
+  margin-top: 2rem;
+  /* margin: 0px 690px 10px; */
   display: block!important; 
 }
 
@@ -187,6 +187,7 @@
 
 
 .main-body{
+  min-height: 100vh;
   height: 100%;
   width: 100%;
   display: flex;
@@ -444,7 +445,8 @@ textarea {
   
   .DOCUMENTS {
     font-size: medium;
-    border-radius: 1rem;
+    border-radius: 10px;
+    border: #000;
     /* background-color: #d3dce7; */
     background-color: #fff;
     padding: 2rem;

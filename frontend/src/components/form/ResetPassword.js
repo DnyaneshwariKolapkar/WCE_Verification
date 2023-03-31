@@ -2,6 +2,7 @@ import { React, useState } from 'react'
 import '../../assets/style.css'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Images } from "../../context/images"
 
 
 const ResetPassword = () => {
@@ -34,7 +35,7 @@ const ResetPassword = () => {
         <>
             <div className='Header'>
                 <img
-                    src="https://cdn.discordapp.com/attachments/814496393619832852/1089115898662629436/FinIQ_2.png"
+                    src={Images.logoImage}
                     alt=''
                     className='image'
                 />

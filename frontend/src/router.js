@@ -30,9 +30,11 @@ const Router = () => {
                 <Route path='/sidebar' element={<Sidebar />} >
 
                     <Route path="" element={<Pendingreq />} />
+                    <Route path="pendingstudents" element={<Pendingstudents />} />
                     <Route path="pendingreq" element={<Pendingreq />} />
                     <Route path="pendingreq/pendingstudents" element={<Pendingstudents />} />
                     <Route path="pendingreq/pendingstudents/view" element={<DocView />} />
+                    <Route path="pendingstudents/view" element={<DocView />} />
 
                     <Route path="allreq" element={<Allreq />} />
                     <Route path="allreq/pendingstudents" element={<Pendingstudents />} />

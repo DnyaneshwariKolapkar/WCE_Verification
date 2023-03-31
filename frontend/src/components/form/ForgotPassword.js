@@ -2,6 +2,7 @@ import React from 'react'
 import '../../assets/style.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Images } from "../../context/images"
 
 const ForgotPassword = () => {
 
@@ -37,7 +38,7 @@ const ForgotPassword = () => {
         <>
             <div className='Header'>
                 <img
-                    src="https://cdn.discordapp.com/attachments/814496393619832852/1089115898662629436/FinIQ_2.png"
+                    src={Images.logoImage}
                     alt=''
                     className='image'
                 />
