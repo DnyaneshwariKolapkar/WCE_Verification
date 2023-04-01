@@ -13,7 +13,11 @@ const Pendingstudents = () => {
         const requestData = async () => {
             try {
                 const response = await axios.post('http://localhost:5000/verification/admin/getstudents', {
-                    unqId: unqId
+                    unqId: unqId,
+                }, {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
                 })
                 if (response.status === 200) {
                     setData(response.data.data);
@@ -23,7 +27,7 @@ const Pendingstudents = () => {
             }
         }
         requestData()
-    }, [])
+    }, [unqId])
     return (
         <>
             <div className="container-table">

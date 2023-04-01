@@ -27,7 +27,6 @@ exports.getPendingApis = trycatch(async (req, res) => {
 // ------------ POST REQUEST : /verification/admin/getstudents ------------ //
 
 exports.getStudents = trycatch(async (req, res) => {
-    console.log(req.body.unqId);
     const students = await Student.find({ unqId: req.body.unqId })
     res.status(200).json({
         status: "success",

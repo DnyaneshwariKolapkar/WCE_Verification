@@ -19,6 +19,7 @@ const Login = () => {
         const res = await axios.post('http://localhost:5000/verification/login', user);
         console.log(res.data);
         if (res.status === 200) {
+          localStorage.setItem('token', res.data.token);
           alert("Login Successfull");
           navigate('/sidebar');
         }
