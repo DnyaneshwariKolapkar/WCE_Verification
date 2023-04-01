@@ -15,7 +15,6 @@ import ResetPassword from './components/form/ResetPassword'
 import Pendingstudents from './pages/pendingstudents'
 import DocView from './pages/DocView'
 
-
 const Router = () => {
     return (
         <>
@@ -27,7 +26,7 @@ const Router = () => {
                 <Route path='/login' element={<Login />} />
                 <Route path='/forgotpassword' element={<ForgotPassword />} />
                 <Route path='/resetpassword/:id/:token' element={<ResetPassword />} />
-                <Route path='/sidebar' element={<Sidebar />} >
+                {localStorage.getItem('token') ? <Route path='/sidebar' element={<Sidebar />} >
 
                     <Route path="" element={<Pendingreq />} />
                     <Route path="pendingstudents" element={<Pendingstudents />} />
@@ -46,7 +45,8 @@ const Router = () => {
 
                     <Route path="manageuser" element={<ManageUser />} />
 
-                </Route>
+                </Route> : <Route path='/' element={<Login />} />
+                }
                 <Route path="*" element= {<Insrtuctions /> } />
             </Routes>
         </>

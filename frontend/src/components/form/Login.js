@@ -6,6 +6,9 @@ import { Images } from "../../context/images"
 
 
 const Login = () => {
+  if (localStorage.getItem('token')) {
+    window.location.href = '/sidebar';
+  }
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
