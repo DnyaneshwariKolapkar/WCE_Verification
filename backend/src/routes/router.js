@@ -3,6 +3,10 @@ const router = Express.Router();
 const studentController = require('../controllers/studentcontroller');
 const veryficationController = require('../controllers/verifycontroller');
 const userController = require('../controllers/usercontroller');
+const infocontroller = require('../controllers/infocontroller');
+
+
+// ------------ client routes ------------ //
 
 router.post(
     '/verification/insertstudent',
@@ -10,28 +14,36 @@ router.post(
     studentController.insertStudent
 );
 
+
+// ------------ admin routes ------------ //
+
 router.get(
     '/verification/admin/allreq',
+    userController.auth,
     veryficationController.getApis
 );
 
 router.get(
     '/verification/admin/pendingreq',
+    userController.auth,
     veryficationController.getPendingApis
 )
 
 router.post(
     '/verification/admin/getstudents',
+    userController.auth,
     veryficationController.getStudents
 );
 
 router.post(
     '/verification/admin/verify',
+    userController.auth,
     veryficationController.verify
 );
 
 router.get(
     '/verification/admin/getpdf',
+    userController.auth,
     veryficationController.getpdf
 );
 
@@ -73,5 +85,45 @@ router.post(
     '/verification/changepassword',
     userController.changePassword
 )
+
+// ------------ studentinfo routes ------------ //
+
+router.post(
+    '/verification/admin/insertstudentinfo',
+    userController.auth,
+    infocontroller.insertStudentInfo
+);
+
+router.post(
+    '/verification/admin/insertmultiplestudentinfo',
+    userController.auth,
+    infocontroller.upload.single('file'),
+    infocontroller.insertMultipleStudentInfo
+);
+
+router.post(
+    '/verification/admin/getstudentinfo',
+    userController.auth,
+    infocontroller.getStudentInfo
+);
+
+router.get(
+    '/verification/admin/getstudentinfoall',
+    userController.auth,
+    infocontroller.getAllStudentsInfo
+);
+
+router.post(
+    '/verification/admin/updatestudentinfo',
+    userController.auth,
+    infocontroller.updateStudentInfo
+);
+
+router.post(
+    '/verification/admin/deletestudentinfo',
+    userController.auth,
+    infocontroller.deleteStudentInfo
+);
+
 
 module.exports = router;
