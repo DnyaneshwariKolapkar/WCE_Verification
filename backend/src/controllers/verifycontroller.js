@@ -58,8 +58,8 @@ exports.verifyStudent = trycatch(async (req, res) => {
     if (student === null) {
         throw new Error("Student not found");
     }
-    if (status === "verified") {
-        student.verified = "verified";
+    if (status === "approved") {
+        student.verified = "approved";
     }
     else if (status === "rejected") {
         student.verified = "rejected";

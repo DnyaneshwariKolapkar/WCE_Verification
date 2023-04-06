@@ -15,8 +15,8 @@ const studentSchema = new schema({
         type: [String],
         required: [true, "Grade Cards are required"],
     },
-    verified: {
-        enum: ["pending", "verified", "rejected"],
+    status: {
+        enum: ["pending", "approved", "rejected"],
         type: String,
         default: "pending",
     }
