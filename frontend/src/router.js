@@ -26,7 +26,7 @@ const Router = () => {
                 <Route path='/login' element={<Login />} />
                 <Route path='/forgotpassword' element={<ForgotPassword />} />
                 <Route path='/resetpassword/:id/:token' element={<ResetPassword />} />
-                {localStorage.getItem('token') ? <Route path='/sidebar' element={<Sidebar />} >
+                <Route path='/sidebar' element={<Sidebar />} >
 
                     <Route path="" element={<Pendingreq />} />
                     <Route path="pendingstudents" element={<Pendingstudents />} />
@@ -45,8 +45,7 @@ const Router = () => {
 
                     <Route path="manageuser" element={<ManageUser />} />
 
-                </Route> : <Route path='/' element={<Login />} />
-                }
+                </Route>
                 <Route path="*" element= {<Insrtuctions /> } />
             </Routes>
         </>

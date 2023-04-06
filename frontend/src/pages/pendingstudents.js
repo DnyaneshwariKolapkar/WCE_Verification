@@ -39,11 +39,12 @@ const Pendingstudents = () => {
                     </li>
                     {data.map((item, index) => {
                         return (
-                            <li className="table-row" onClick={() => navigate('view', { state: { documents: data[index].documents } })} key={index}>
+                            <li className="table-row" onClick={() => navigate('view', { state: { documents: data[index].documents, id: data[index]._id } })} key={index}>
                                 <div className="col col-1" data-label="Sr no">{index + 1}</div>
                                 <div className="col col-2" data-label="Student Name">{item.name}</div>
-                                {item.isVerified && <div className="col col-3" data-label="Status" style={{ color: "green" }}>Verified</div>}
-                                {!item.isVerified && <div className="col col-3" data-label="Status" style={{ color: "red" }}>Pending</div>}
+                                {item.status === 'pending' ? <div className="col col-3" data-label="Status" style={{ color: 'yellow' }}>{item.status}</div> : null}
+                                {item.status === 'approved' ? <div className="col col-3" data-label="Status" style={{ color: 'green' }}>{item.status}</div> : null}
+                                {item.status === 'rejected' ? <div className="col col-3" data-label="Status" style={{ color: 'red' }}>{item.status}</div> : null}
                             </li>
                         )
                     })}

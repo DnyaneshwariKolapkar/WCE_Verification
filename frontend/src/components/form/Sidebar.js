@@ -9,12 +9,13 @@ import {
     FaSignOutAlt
 
 } from "react-icons/fa";
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const navigate = useNavigate();
     const menuItem = [
         {
             path: "pendingreq",
@@ -42,7 +43,7 @@ const Sidebar = () => {
             icon: <FaUserAlt />
         },
         {
-            path: "logout",
+            path: "/login",
             name: "Logout",
             icon: <FaSignOutAlt />
         }
@@ -59,7 +60,7 @@ const Sidebar = () => {
                 {
                     menuItem.map((item, index) => (
                         <NavLink to={item.path} key={index} className="link">
-                            <div className="icon">{item.icon}</div>
+                            {item.name==="Logout" ? <div className="icon" onClick={() => localStorage.removeItem('token')}>{item.icon}</div> : <div className="icon">{item.icon}</div>}
                             <div style={{ display: isOpen ? "block" : "none" }} className="link_text">{item.name}</div>
                         </NavLink>
                     ))
