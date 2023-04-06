@@ -55,7 +55,7 @@ exports.verify = trycatch(async (req, res) => {
 exports.verifyStudent = trycatch(async (req, res) => {
     const status = req.params.status;
     const student = await Student.findOne({ _id: req.body.id });
-    if (!student) {
+    if (student === null) {
         throw new Error("Student not found");
     }
     if (status === "verified") {
