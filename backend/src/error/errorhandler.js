@@ -23,6 +23,13 @@ exports.errorHandler = (err, req, res, next) => {
         });
     }
 
+    if (err.message === "Invalid tag") {
+        return res.status(400).json({
+            error: err.message,
+            message: "Invalid tag",
+        });
+    }
+
     return res.status(500).json({
         error: err.message,
         message: "Something went wrong",

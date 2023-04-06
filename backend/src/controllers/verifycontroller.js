@@ -77,3 +77,33 @@ exports.getpdf = trycatch(async (req, res) => {
     });
 });
 
+
+// ------------ POST REQUEST : /verification/admin/studentsrequests/:tag ------------ //
+
+exports.getStudentRequests = trycatch(async (req, res) => {
+    const tag = req.params.tag;
+    if (tag === "all") {
+        const students = await Student.find();
+        res.status(200).json({
+            status: "success",
+            data: students,
+        });
+    }
+    else if (tag === "pending") {
+        const students = await Student.find({ isVerified: false });
+        res.status(200).json({
+            status: "success",
+            data: students,
+        });
+    }
+    else if (tag === "verified") {
+        const students = await Student.find({ isVerified: true });
+        res.status(200).json({
+            status: "success",
+            data: students,
+        });
+    }
+    else {
+        throw new Error("Invalid tag");
+    }
+});

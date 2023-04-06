@@ -29,6 +29,12 @@ router.get(
     veryficationController.getPendingApis
 )
 
+router.get(
+    '/verification/admin/studentsrequests/:tag',
+    userController.auth,
+    veryficationController.getStudentRequests
+);
+
 router.post(
     '/verification/admin/getstudents',
     userController.auth,
