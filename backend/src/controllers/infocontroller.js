@@ -68,7 +68,7 @@ exports.insertMultipleStudentInfo = trycatch(async (req, res) => {
 
 exports.getStudentInfo = trycatch(async (req, res) => {
     const prn = req.body.prn;
-    const student = await StudentInfo.find({ prn });
+    const student = await StudentInfo.findOne({ prn });
     res.status(200).json({
         status: 'success',
         message: 'Student fetched successfully',
