@@ -47,6 +47,12 @@ router.post(
     veryficationController.verify
 );
 
+router.post(
+    '/verification/admin/verifystudent/:status',
+    userController.auth,
+    veryficationController.verifyStudent
+);
+
 router.get(
     '/verification/admin/getpdf',
     userController.auth,

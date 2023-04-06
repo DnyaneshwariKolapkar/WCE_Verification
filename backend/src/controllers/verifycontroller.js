@@ -50,6 +50,28 @@ exports.verify = trycatch(async (req, res) => {
 });
 
 
+// ------------ POST REQUEST : /verification/admin/verifystudent/:status ------------ //
+
+exports.verifyStudent = trycatch(async (req, res) => {
+    const status = req.params.status;
+    const student = await Student.findOne({ _id: req.body.id });
+    if (!student) {
+        throw new Error("Student not found");
+    }
+    if (status === "verified") {
+        student.verified = "verified";
+    }
+    else if (status === "rejected") {
+        student.verified = "rejected";
+    }
+    await student.save();
+    res.status(200).json({
+        status: "success",
+        data: student
+    });
+});
+
+
 // ------------ GET REQUEST : /verification/getpdf ------------ //
 
 const PDF = require('html-pdf');

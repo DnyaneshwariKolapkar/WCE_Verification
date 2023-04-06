@@ -15,10 +15,11 @@ const studentSchema = new schema({
         type: [String],
         required: [true, "Grade Cards are required"],
     },
-    isVerified: {
-        type: Boolean,
-        default: false,
-    },
+    verified: {
+        enum: ["pending", "verified", "rejected"],
+        type: String,
+        default: "pending",
+    }
 })   
 
 const Student = mongoose.model('Student', studentSchema);
