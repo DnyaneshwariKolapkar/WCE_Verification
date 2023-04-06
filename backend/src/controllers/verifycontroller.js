@@ -59,10 +59,10 @@ exports.verifyStudent = trycatch(async (req, res) => {
         throw new Error("Student not found");
     }
     if (status === "approved") {
-        student.verified = "approved";
+        student.status = "approved";
     }
     else if (status === "rejected") {
-        student.verified = "rejected";
+        student.status = "rejected";
     }
     await student.save();
     res.status(200).json({
