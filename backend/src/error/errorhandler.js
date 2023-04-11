@@ -30,6 +30,13 @@ exports.errorHandler = (err, req, res, next) => {
         });
     }
 
+    if (err.message === "Student not found") {
+        return res.status(404).json({
+            error: err.message,
+            message: "Student not found",
+        });
+    }
+
     return res.status(500).json({
         error: err.message,
         message: "Something went wrong",
