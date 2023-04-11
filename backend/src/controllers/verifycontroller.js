@@ -65,8 +65,7 @@ exports.verifyStudent = trycatch(async (req, res) => {
     
     student.name = req.body.name;
     student.prn = req.body.prn;
-    student.branch = req.body.branch;
-    student.year = req.body.year;
+    student.passingYear = req.body.passingYear;
 
     await student.save();
     res.status(200).json({
