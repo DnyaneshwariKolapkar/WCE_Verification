@@ -95,7 +95,10 @@ exports.updateStudentInfo = trycatch(async (req, res) => {
     const prn = req.body.prn;
     const student = await StudentInfo.findOne({ prn });
     if (!student) {
-        throw new Error('Student not found');
+        res.status(404).json({
+            status: 'fail',
+            message: 'Student not found'
+        });
     }
     student.name = req.body.name;
     student.branch = req.body.branch;
