@@ -62,6 +62,12 @@ exports.verifyStudent = trycatch(async (req, res) => {
     else if (status === "rejected") {
         student.status = "rejected";
     }
+    
+    student.name = req.body.name;
+    student.prn = req.body.prn;
+    student.branch = req.body.branch;
+    student.year = req.body.year;
+
     await student.save();
     res.status(200).json({
         status: "success",
