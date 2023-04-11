@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            align-items: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid black;
+        }
+
+        .container {
+            margin: 0 auto;
+            width: 90%;
+            display: flex;
+        }
+
+        .left-align-logo {
+            height: 60px;
+            padding: 14px 0 0 0;
+            position: fixed;
+            left: 20px;
+            top: 0;
+        }
+
+        .right-align-logo {
+            height: 80px;
+            position: fixed;
+            right: 20px;
+            top: 0;
+        }
+
+        .header-text {
+            padding: 0 0 0 0;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+
+        .header-text p {
+            text-align: center;
+        }
+
+        .tel-logo {
+            float: left;
+            height: 12px;
+            padding: 0 10px 0 0;
+        }
+
+        .left-cont {
+            float: left;
+            width: 50%;
+            display: flex;
+        }
+
+        .right-cont {
+            float: right;
+            width: 50%;
+            text-align: right;
+        }
+
+        .container-inner {
+            margin: 0 auto;
+            width: 80%;
+            display: flex;
+            padding: 20px 0 0 0;
+        }
+
+        .image-sign {
+            height: 40px;
+            padding: 0 0 0 0;
+        }
+
+        .first {
+            font-size: 0.6em;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="first">
+        <div class="header">
+            <div class="container">
+                <img class="left-align-logo" src="http://127.0.0.1:5500/backend/src/views/images/logo.png" alt="WCE">
+                <div class="header-text">
+                    <p>
+                    <div style="
+                                            font-size: 0.8em;
+                                            font-weight: 800;
+                                            text-align: center;
+                                                ">Walchand College of Engineering</div>
+                    <div style="
+                                            font-weight: 600;
+                                            text-align: center;
+                                                ">(Goverment Aided Autonomous Institute)</div>
+                    <div style="
+                                            text-align: center;
+                                                ">Vishrambag, SANGALI - 416415 (M.S.) India</div>
+                    <div style="
+                                            text-align: center;
+                                                ">Website: www.walchandsangli.ac.in</div>
+                    </p>
+                </div>
+                <img class="right-align-logo" src="http://127.0.0.1:5500/backend/src/views/images/75Yr-Png.png"
+                    alt="WCE">
+            </div>
+
+            <hr>
+            <div class="container">
+                <div class="left-cont">
+                    <img class="tel-logo" src="http://127.0.0.1:5500/backend/src/views/images/telephone.png" alt="WCE">
+                    <p style="margin: 0;">+91-233-2303433</p>
+                </div>
+                <div class="right-cont">
+                    <p style="margin: 0%;">Email: info@walchandsangli.ac.in</p>
+                </div>
+            </div>
+            <hr>
+
+            <h2 style="text-align: center;"><u>Examination Section</u></h2>
+
+            <section>
+                <div class="container-inner">
+                    <div class="left-cont">
+                        <p>Ref.No. WCE/ES/Verification/NUMBER</p>
+                    </div>
+                    <div class="right-cont">
+                        <p>Date: DD/MM/YYYY</p>
+                    </div>
+                </div>
+                <div class="container-inner" style="display: block;">
+                    <p style="margin: 0;">To,</p>
+                    <br>
+                    <p style="margin: 0;">{{name}}</p>
+                    <p style="margin: 0;">ADDRESS</p>
+                </div>
+                <div class="container-inner" style="display: block;">
+                    <p>Dear Sir/Madam,</p>
+                    <p>With reference to your letter on requesting education verification, we have verified all the
+                        records of
+                        students mentioned below.</p>
+                </div>
+            </section>
+
+            <section>
+                <div class="container-inner" style="
+            /* adjust text size to become responsive */
+            font-size: 0.8em;
+            ">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Student Name</th>
+                                <th>Qualification</th>
+                                <th>Exam No./PRN</th>
+                                <th>Year of Passing</th>
+                                <th>Percentage/CPI/CGPA</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Vaishnavi Vivekanand Kulkarni</td>
+                                <td>askjdba.ksn d.kajsndknkjasbncdkn oiashdfoihawifhljansf </td>
+                                <td>2020BTEIT00055</td>
+                                <td>2022</td>
+                                <td>RESULT</td>
+                                <td>VERIFIED</td>
+                            </tr>
+                            @insert_here
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <br>
+            <section>
+                <div class="container-inner" style="display: block;">
+                    <div class="right-cont" style="text-align: center; width: 40%;">
+                        <img class="image-sign"
+                            src="https://drive.google.com/file/d/1eqtRjQHe9c50cP3LpaGgZSHKPeu9i8zG/view?usp=sharing"
+                            alt="WCE">
+                        <p style="margin: 0;">Yours faithfully,</p>
+                        <p style="margin: 0;">Controller of Examinations</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>
+
+</html>

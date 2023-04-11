@@ -43,9 +43,7 @@ exports.verify = trycatch(async (req, res) => {
     await company.save();
     res.status(200).json({
         status: "success",
-        data: {
-            company,
-        },
+        data: company
     });
 });
 
@@ -72,21 +70,44 @@ exports.verifyStudent = trycatch(async (req, res) => {
 });
 
 
-// ------------ GET REQUEST : /verification/getpdf ------------ //
+// ------------ POST REQUEST : /verification/admin/getpdf ------------ //
 
 const PDF = require('html-pdf');
 const fs = require('fs');
 
-const html = fs.readFileSync('./temp.html', 'utf8');
 exports.getpdf = trycatch(async (req, res) => {
     const options = {
-        format: 'A4',
+        format: 'letter',
         childProcessOptions: {
             env: {
                 OPENSSL_CONF: '/dev/null',
             },
         },
     };
+    const company = await Company.findOne({ _id: req.body.unqId });
+    const students = await students.find({ unqId: req.body.unqId });
+    const data = {
+        name: company.name,
+        students: students
+    };
+
+    const html = fs.readFileSync('./src/views/certificate.html', 'utf8', (err, data) => {
+        if (err) throw err;
+        return data;
+    });
+    html.split("{{name}}").join(data.name);
+    let studentrows = "";
+    for (let i = 0; i < data.students.length; i++) {
+        studentrows += `<tr>
+            <td>${i + 1}</td>
+            <td>${data.students[i].name}</td>
+            <td>${data.students[i].email}</td>
+            <td>${data.students[i].phone}</td>
+            <td>${data.students[i].branch}</td>
+            <td>${data.students[i].year}</td>
+        </tr>`;
+    }
+
     PDF.create(html, options).toFile(
         './temp.pdf',
         (err, res) => {

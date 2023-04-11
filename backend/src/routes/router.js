@@ -53,9 +53,9 @@ router.post(
     veryficationController.verifyStudent
 );
 
-router.get(
+router.post(
     '/verification/admin/getpdf',
-    userController.auth,
+    // userController.auth,
     veryficationController.getpdf
 );
 
