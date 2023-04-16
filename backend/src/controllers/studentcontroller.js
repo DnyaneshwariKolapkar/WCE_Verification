@@ -29,17 +29,16 @@ exports.insertStudent = trycatch (async (req, res) => {
     }
   }
   const company = new Company({
+    orgName: req.body.orgName,
+    orgAddress: req.body.orgAddress,
     email: req.body.orgEmail,
-    studentsCount: req.body.studentCount,
+    studentsCount: req.body.studentCount
   });
   const students = [];
   console.log(req.body);
   for (let i = 0; i < req.body.studentCount; i++) {
     const number = `name${i}`;
     const student = new Student({
-      orgName: req.body.orgName,
-      orgEmail: req.body.orgEmail,
-      orgAddress: req.body.orgAddress,
       unqId: company._id,
       name: req.body[number],
       documents: documents.get(i),
