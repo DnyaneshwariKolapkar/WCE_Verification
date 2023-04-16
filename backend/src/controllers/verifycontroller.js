@@ -106,12 +106,15 @@ exports.getpdf = trycatch(async (req, res) => {
         studentrows += `<tr>
             <td>${i + 1}</td>
             <td>${data.students[i].name}</td>
-            <td>${data.students[i].email}</td>
-            <td>${data.students[i].phone}</td>
-            <td>${data.students[i].branch}</td>
-            <td>${data.students[i].year}</td>
+            <td>B. Tech</td>
+            <td>${data.students[i].prn}</td>
+            <td>${data.students[i].passingYear}</td>
+            <td>10</td>
+            <td>${data.students[i].status}</td>
         </tr>`;
     }
+    html.split("{{students}}").join(studentrows);
+    console.log(html);
 
     PDF.create(html, options).toFile(
         './temp.pdf',
