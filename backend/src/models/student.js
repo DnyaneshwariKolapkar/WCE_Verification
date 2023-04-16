@@ -11,6 +11,16 @@ const studentSchema = new schema({
         type: String,
         required: [true, "Name is required"],
     },
+    prn: {
+        type: String,
+        required: [true, "PRN is required"],
+        default: "Not Provided",
+    },
+    passingYear: {
+        type: String,
+        required: [true, "Passing Year is required"],
+        default: "Not Provided",
+    },
     documents: {
         type: [String],
         required: [true, "Grade Cards are required"],
