@@ -48,6 +48,24 @@ const Pendingstudents = () => {
         }
     }
 
+    useEffect(() => {
+        const reload = async () => {
+            try {
+                const response = await axios.post('http://localhost:5000/verification/admin/getpdf', {
+                    unqId: unqId,
+                }, {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
+        reload();
+    })
+
 
 
     return (
@@ -78,24 +96,23 @@ const Pendingstudents = () => {
                     View certificate
                 </button>
                 {
-                    popup === true ?
-                        <div className="popup">
-                            <DocViewer
-                                documents={[
-                                    {
-                                        uri: `http://localhost:5000/certificate/${unqId}.pdf`
-                                    },
-                                ]}
-                                config={{
-                                    header: {
-                                        disableFileName: true,
-                                    }
-                                }}
+                    popup === true &&
+                    <div className="popup">
+                        <DocViewer
+                            documents={[
+                                {
+                                    uri: `http://localhost:5000/certificate/${unqId}.pdf`
+                                },
+                            ]}
+                            config={{
+                                header: {
+                                    disableFileName: true,
+                                }
+                            }}
 
-                            />
-                            <button onClick={() => Setpopup(false)}>close</button>
-                        </div>
-                        : null
+                        />
+                        <button onClick={() => Setpopup(false)}>close</button>
+                    </div>
                 }
             </div>
         </>
