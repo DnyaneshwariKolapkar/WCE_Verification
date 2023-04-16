@@ -96,11 +96,11 @@ exports.getpdf = trycatch(async (req, res) => {
         students: students
     };
 
-    const html = fs.readFileSync('./src/views/certificate.html', 'utf8', (err, data) => {
+    let html = fs.readFileSync('./src/views/certificate.html', 'utf8', (err, data) => {
         if (err) throw err;
         return data;
     });
-    html.split("{{name}}").join(data.name);
+    html = html.split("{{name}}").join(data.name);
     let studentrows = "";
     for (let i = 0; i < data.students.length; i++) {
         studentrows += `<tr>
@@ -113,8 +113,7 @@ exports.getpdf = trycatch(async (req, res) => {
             <td>${data.students[i].status}</td>
         </tr>`;
     }
-    html.split("{{students}}").join(studentrows);
-    console.log(html);
+    html = html.split("{{students}}").join(studentrows);
 
     PDF.create(html, options).toFile(
         './temp.pdf',
