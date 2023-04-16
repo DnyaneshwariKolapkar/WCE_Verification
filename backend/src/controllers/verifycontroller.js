@@ -114,16 +114,16 @@ exports.getpdf = trycatch(async (req, res) => {
         </tr>`;
     }
     html = html.split("{{students}}").join(studentrows);
-
     PDF.create(html, options).toFile(
-        './temp.pdf',
+        `./src/views/certificates/${unqId}.pdf`,
         (err, res) => {
             if (err) res.status(500).send(err);
         }
     );
     res.status(200).json({
         status: "success",
-        message: "PDF Generated"
+        message: "PDF Generated",
+        certificate: 
     });
 });
 
