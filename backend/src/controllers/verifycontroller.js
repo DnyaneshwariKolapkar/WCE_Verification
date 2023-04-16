@@ -100,20 +100,20 @@ exports.getpdf = trycatch(async (req, res) => {
         if (err) throw err;
         return data;
     });
-    html = html.split("{{name}}").join(data.name);
-    let studentrows = "";
-    for (let i = 0; i < data.students.length; i++) {
-        studentrows += `<tr>
-            <td>${i + 1}</td>
-            <td>${data.students[i].name}</td>
-            <td>B. Tech</td>
-            <td>${data.students[i].prn}</td>
-            <td>${data.students[i].passingYear}</td>
-            <td>10</td>
-            <td>${data.students[i].status}</td>
-        </tr>`;
-    }
-    html = html.split("{{students}}").join(studentrows);
+    // html = html.split("{{name}}").join(data.name);
+    // let studentrows = "";
+    // for (let i = 0; i < data.students.length; i++) {
+    //     studentrows += `<tr>
+    //         <td>${i + 1}</td>
+    //         <td>${data.students[i].name}</td>
+    //         <td>B. Tech</td>
+    //         <td>${data.students[i].prn}</td>
+    //         <td>${data.students[i].passingYear}</td>
+    //         <td>10</td>
+    //         <td>${data.students[i].status}</td>
+    //     </tr>`;
+    // }
+    // html = html.split("{{students}}").join(studentrows);
     PDF.create(html, options).toFile(
         `./src/public/certificates/${req.body.unqId}.pdf`,
         (err, res) => {
