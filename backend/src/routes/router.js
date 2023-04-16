@@ -55,7 +55,7 @@ router.post(
 
 router.post(
     '/verification/admin/getpdf',
-    // userController.auth,
+    userController.auth,
     veryficationController.getpdf
 );
 

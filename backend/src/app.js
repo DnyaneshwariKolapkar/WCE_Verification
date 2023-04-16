@@ -11,6 +11,7 @@ require('./db/connect');
 app.use(cors());
 app.use("/document", Express.static(__dirname + "/public/students"));
 app.use("/certificate", Express.static(__dirname + "/public/certificates"));
+app.use("/images", Express.static(__dirname + "/views/images"));
 
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
