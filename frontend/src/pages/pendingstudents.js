@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import DocViewer from "@cyntler/react-doc-viewer";
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -7,6 +8,7 @@ const Pendingstudents = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const unqId = location?.state?.unqId;
+    const [popup, Setpopup] = useState(false);
 
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -28,6 +30,26 @@ const Pendingstudents = () => {
         }
         requestData()
     }, [unqId])
+
+    const viewButton = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/verification/admin/getpdf', {
+                unqId: unqId,
+            }, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            if (response.status === 200) {
+                Setpopup(true);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
     return (
         <>
             <div className="container-table">
@@ -50,10 +72,32 @@ const Pendingstudents = () => {
                     })}
 
                 </ul>
+                <button className="viewButton"
+                    onClick={viewButton}
+                    style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 5px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} >
+                    View certificate
+                </button>
+                {
+                    popup === true ?
+                        <div className="popup">
+                            <DocViewer
+                                documents={[
+                                    {
+                                        uri: `http://localhost:5000/certificate/${unqId}.pdf`
+                                    },
+                                ]}
+                                config={{
+                                    header: {
+                                        disableFileName: true,
+                                    }
+                                }}
+
+                            />
+                            <button onClick={() => Setpopup(false)}>close</button>
+                        </div>
+                        : null
+                }
             </div>
-            {/* <h1>
-                Pending Student
-            </h1> */}
         </>
     );
 };
