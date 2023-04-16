@@ -6,8 +6,8 @@ import {
     FaRegChartBar,
     FaRupeeSign,
     FaHistory,
-    FaSignOutAlt
-
+    FaSignOutAlt,
+    FaArrowLeft    
 } from "react-icons/fa";
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
@@ -16,6 +16,10 @@ const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const navigate = useNavigate();
+
+    function handleGoBack() {
+        navigate(-1);
+    }
     const menuItem = [
         {
             path: "pendingreq",
@@ -59,8 +63,10 @@ const Sidebar = () => {
                 </div>
                 {
                     menuItem.map((item, index) => (
-                        <NavLink to={item.path} key={index} className="link">
-                            {item.name==="Logout" ? <div className="icon" onClick={() => localStorage.removeItem('token')}>{item.icon}</div> : <div className="icon">{item.icon}</div>}
+                        <NavLink to={item.path} key={index} className="link"
+                            {...item.name === "Logout" ? { onClick: () => localStorage.removeItem('token') } : {}}
+                        >
+                            <div className="icon">{item.icon}</div>
                             <div style={{ display: isOpen ? "block" : "none" }} className="link_text">{item.name}</div>
                         </NavLink>
                     ))
@@ -69,6 +75,11 @@ const Sidebar = () => {
             <main>
                 <Outlet />
             </main>
+            <button>
+                <FaArrowLeft
+                style={{position: "fixed", top: "30px", left: isOpen ? "270px" : "100px", fontSize: "30px", color: "#222E3C", cursor: "pointer", borderRadius: "50px", boxShadow: "0 0 10px 0 rgba(0,0,0,0.8)", padding: "5px", transition: "all 0.5s"}}
+                onClick={handleGoBack} />
+            </button>
         </div>
     );
 };
