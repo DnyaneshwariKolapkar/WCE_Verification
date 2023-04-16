@@ -15,10 +15,6 @@ const companySchema = new schema({
         type: String,
         required: [true, "Address is required"],
     },
-    email: {
-        type: String,
-        required: [true, "Email is required"],
-    },
     studentsCount: {
         type: Number,
         required: [true, "Students Count is required"],

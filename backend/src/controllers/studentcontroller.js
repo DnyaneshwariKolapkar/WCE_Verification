@@ -31,7 +31,7 @@ exports.insertStudent = trycatch (async (req, res) => {
   const company = new Company({
     orgName: req.body.orgName,
     orgAddress: req.body.orgAddress,
-    email: req.body.orgEmail,
+    orgEmail: req.body.orgEmail,
     studentsCount: req.body.studentCount
   });
   const students = [];
