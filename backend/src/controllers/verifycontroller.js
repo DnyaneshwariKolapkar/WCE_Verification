@@ -122,8 +122,7 @@ exports.getpdf = trycatch(async (req, res) => {
     );
     res.status(200).json({
         status: "success",
-        message: "PDF Generated",
-        certificate: 
+        message: "PDF Generated"
     });
 });
 
