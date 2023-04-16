@@ -115,7 +115,7 @@ exports.getpdf = trycatch(async (req, res) => {
     }
     html = html.split("{{students}}").join(studentrows);
     PDF.create(html, options).toFile(
-        `./src/views/certificates/${unqId}.pdf`,
+        `./src/views/certificates/${req.body.unqId}.pdf`,
         (err, res) => {
             if (err) res.status(500).send(err);
         }
