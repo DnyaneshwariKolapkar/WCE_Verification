@@ -115,7 +115,6 @@ const Pendingstudents = () => {
                             }}
 
                         />
-                        {/* <button onClick={() => Setpopup(false)}>close</button> */}
                         <button style={{float:"right", width: "15%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 5px", border: "none", borderRadius: "5px", cursor: "pointer"}}>send</button>
                     </div>
                 }

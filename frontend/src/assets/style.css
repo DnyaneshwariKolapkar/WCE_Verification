@@ -886,3 +886,17 @@ h2 {
   transition: all 0.5s;
   padding: 5px;
 }
+
+.btn_circle_normal {
+  color: #222E3C;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  transition: all 0.5s;
+  padding: 5px;
+}
