@@ -117,7 +117,8 @@ exports.getpdf = trycatch(async (req, res) => {
     PDF.create(html, options).toFile(
         `./src/public/certificates/${req.body.unqId}.pdf`,
         (err, res) => {
-            if (err) res.status(500).send(err);
+            if (err) throw err;
+            return res;
         }
     );
     res.status(200).json({
