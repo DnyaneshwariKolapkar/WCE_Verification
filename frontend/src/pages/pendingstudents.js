@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import DocViewer from "@cyntler/react-doc-viewer";
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaTimes } from 'react-icons/fa';
 
 const Pendingstudents = () => {
     const navigate = useNavigate();
@@ -98,6 +99,9 @@ const Pendingstudents = () => {
                 {
                     popup === true &&
                     <div className="popup">
+                        <button>
+                            <FaTimes className='btn_circle' onClick={() => Setpopup(false)} />
+                        </button>
                         <DocViewer
                             documents={[
                                 {
@@ -111,7 +115,8 @@ const Pendingstudents = () => {
                             }}
 
                         />
-                        <button onClick={() => Setpopup(false)}>close</button>
+                        {/* <button onClick={() => Setpopup(false)}>close</button> */}
+                        <button style={{float:"right", width: "15%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 5px", border: "none", borderRadius: "5px", cursor: "pointer"}}>send</button>
                     </div>
                 }
             </div>

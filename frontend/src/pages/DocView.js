@@ -115,7 +115,7 @@ const DocView = () => {
     return (
         <>
             <div className='doc-container'>
-                <div className="container" style={{ display: "inline-flex" }}>
+                <div className="container" >
                     <div className="row">
                         <div className="col-12">
                             <DocViewer
@@ -146,7 +146,7 @@ const DocView = () => {
                     {
                         show ?
                             <>
-                                <button style={{ width: "20%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={updateButton}>Update</button>
+                                <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={updateButton}>Update</button>
                                 <br />
                                 <br />
                                 <br />
@@ -226,8 +226,8 @@ const DocView = () => {
                                     <br />
                                 </div>
                                 <br />
-                                <button style={{ width: "20%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("approved")}>Verify</button>
-                                <button style={{ width: "20%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("rejected")}>Reject</button>
+                                <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("approved")}>Verify</button>
+                                <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("rejected")}>Reject</button>
                                 <br />
                                 <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "150px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} >View certificate</button>
                             </>

@@ -76,8 +76,8 @@ const Sidebar = () => {
                 <Outlet />
             </main>
             <button>
-                <FaArrowLeft
-                style={{position: "fixed", top: "30px", left: isOpen ? "270px" : "100px", fontSize: "30px", color: "#222E3C", cursor: "pointer", borderRadius: "50px", boxShadow: "0 0 10px 0 rgba(0,0,0,0.8)", padding: "5px", transition: "all 0.5s"}}
+                <FaArrowLeft className='btn_circle' 
+                style={{left: isOpen ? "270px" : "100px"}}
                 onClick={handleGoBack} />
             </button>
         </div>
