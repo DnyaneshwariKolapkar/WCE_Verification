@@ -30,7 +30,7 @@ const studentSchema = new schema({
         type: String,
         default: "pending",
     }
-})   
+}, { timestamps: true });
 
 const Student = mongoose.model('Student', studentSchema);
 

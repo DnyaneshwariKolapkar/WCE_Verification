@@ -92,7 +92,7 @@ exports.getpdf = trycatch(async (req, res) => {
     const company = await Company.findOne({ _id: req.body.unqId });
     const students = await Student.find({ unqId: req.body.unqId });
     const data = {
-        name: company.name,
+        name: company.orgName,
         students: students
     };
 

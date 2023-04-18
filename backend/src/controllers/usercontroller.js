@@ -72,7 +72,7 @@ exports.createUser = trycatch(async (req, res) => {
 });
 
 
-// ------------ POST REQUEST : /verification/admin/getusers ------------ //
+// ------------ GET REQUEST : /verification/admin/getusers ------------ //
 
 exports.getUsers = trycatch(async (req, res) => {
     if (req.user.role !== 'admin') {
@@ -82,7 +82,7 @@ exports.getUsers = trycatch(async (req, res) => {
     res.status(200).json({
         status: 'success',
         message: 'Users fetched successfully',
-        users
+        data: users
     });
 });
 
