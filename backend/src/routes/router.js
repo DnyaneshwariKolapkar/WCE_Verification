@@ -70,7 +70,7 @@ router.post(
     userController.createUser
 )
 
-router.post(
+router.get(
     '/verification/admin/getusers',
     userController.auth,
     userController.getUsers
