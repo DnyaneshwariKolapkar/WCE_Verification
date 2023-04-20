@@ -1,6 +1,7 @@
 const Student = require("../models/student");
 const Company = require("../models/company");
 const trycatch = require("../error/errorhandler").trycatch;
+const nodeMailer = require("nodemailer");
 
 // ------------ POST REQUEST : /verification/admin/allreq ------------ //
 
@@ -37,8 +38,54 @@ exports.getStudents = trycatch(async (req, res) => {
 
 // ------------ POST REQUEST : /verification/admin/verify ------------ //
 
+
+// ------------ SEND THE EMAIL ------------ //
+
+const transporter = nodeMailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: 'demoritv1421@gmail.com',
+        pass: 'gzbhjzpzyhsqxhwp'
+    }
+});
+
+const sendEmail = (id, email) => {
+    try {
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: email,
+            subject: "Verification",
+            html: `<h1>Verification</h1>
+            <p>Document verification is done. Please find the certificate attached.</p>
+            <p>Thank you</p>`,
+            attachments: [
+                {
+                    filename: "certificate.pdf",
+                    path: `http://localhost:5000/certificate/${id}.pdf`
+                }
+            ]
+        };
+
+        const info = transporter.sendMail(mailOptions);
+        return info;
+    } catch (error) {
+        console.log(error);
+        return 'data';
+    }
+}     
+
+// ------------ API ------------ //
+
 exports.verify = trycatch(async (req, res) => {
     const company = await Company.findOne({ _id: req.body.unqId });
+    if (company === null) {
+        throw new Error("Company not found");
+    }
+
+    const info = await sendEmail(req.body.unqId, company.orgEmail);
+    if (info === null) {
+        throw new Error("Email not sent");
+    }
     company.isVerified = true;
     await company.save();
     res.status(200).json({
@@ -114,11 +161,11 @@ exports.getpdf = trycatch(async (req, res) => {
         </tr>`;
     }
     html = html.split("{{students}}").join(studentrows);
+    html = html.split("{{date}}").join(new Date().toLocaleDateString());
     PDF.create(html, options).toFile(
         `./src/public/certificates/${req.body.unqId}.pdf`,
         (err, res) => {
-            if (err) throw err;
-            return res;
+            if (err) console.log(err);
         }
     );
     res.status(200).json({

@@ -49,10 +49,27 @@ const Pendingstudents = () => {
         }
     }
 
+    const verifyCompany = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/verification/admin/verify', { unqId: unqId }, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            if (response.status === 200) {
+                alert("Company verified successfully");
+            }
+        }
+        catch (error) {
+            console.log(error)
+            alert("Company not verified");
+        }
+    }
+
     useEffect(() => {
         const reload = async () => {
             try {
-                const response = await axios.post('http://localhost:5000/verification/admin/getpdf', {
+                await axios.post('http://localhost:5000/verification/admin/getpdf', {
                     unqId: unqId,
                 }, {
                     headers: {
@@ -115,7 +132,10 @@ const Pendingstudents = () => {
                             }}
 
                         />
-                        <button style={{float:"right", width: "15%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 5px", border: "none", borderRadius: "5px", cursor: "pointer"}}>send</button>
+                        <button 
+                        style={{float:"right", width: "15%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 5px", border: "none", borderRadius: "5px", cursor: "pointer"}}
+                        onClick={() => verifyCompany() }
+                        >send</button>
                     </div>
                 }
             </div>
