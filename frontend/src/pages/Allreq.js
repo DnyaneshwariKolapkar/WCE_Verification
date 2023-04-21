@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const Allreq = () => {
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const [data, setData] = useState([])
     useEffect(() => {
@@ -12,7 +13,7 @@ const Allreq = () => {
             try {
                 const response = await axios.get('http://localhost:5000/verification/admin/allreq', {
                     headers: {
-                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                        "Authorization": `Bearer ${user.token}`
                     }
                 })
                 if (response.status === 200) {

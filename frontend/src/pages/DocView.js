@@ -11,6 +11,7 @@ const DocView = () => {
     const [prn, setPrn] = React.useState("");
     const [show, setShow] = React.useState(false);
     const [student, setStudent] = React.useState({});
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const location = useLocation();
     const id = location?.state?.id;
@@ -27,7 +28,7 @@ const DocView = () => {
                     { prn: prn },
                     {
                         headers: {
-                            "Authorization": `Bearer ${localStorage.getItem('token')}`
+                            "Authorization": `Bearer ${user.token}`
                         }
                     }
                 );
@@ -65,7 +66,7 @@ const DocView = () => {
                     },
                     {
                         headers: {
-                            Authorization: `Bearer ${localStorage.getItem('token')}`
+                            Authorization: `Bearer ${user.token}`
                         }
                     }
                 );
@@ -91,7 +92,7 @@ const DocView = () => {
                     student,
                     {
                         headers: {
-                            Authorization: `Bearer ${localStorage.getItem('token')}`
+                            Authorization: `Bearer ${user.token}`
                         }
                     }
                 );

@@ -16,6 +16,7 @@ const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'));
 
     function handleGoBack() {
         navigate(-1);
@@ -43,7 +44,7 @@ const Sidebar = () => {
         },
         {
             path: "manageuser",
-            name: "Manage Users",
+            name: "Manage User",
             icon: <FaUserAlt />
         },
         {
@@ -52,6 +53,13 @@ const Sidebar = () => {
             icon: <FaSignOutAlt />
         }
     ]
+
+    if (user && user.role !== 'admin') {
+        // remove manage user from menu
+        menuItem[4] = menuItem[5];
+        menuItem.pop();
+    }
+
     return (
         <div className="container-sidebar">
             <div style={{ width: isOpen ? "250px" : "50px" }} className="sidebar">
@@ -64,7 +72,7 @@ const Sidebar = () => {
                 {
                     menuItem.map((item, index) => (
                         <NavLink to={item.path} key={index} className="link"
-                            {...item.name === "Logout" ? { onClick: () => localStorage.removeItem('token') } : {}}
+                            {...item.name === "Logout" ? { onClick: () => localStorage.removeItem('user') } : null}
                         >
                             <div className="icon">{item.icon}</div>
                             <div style={{ display: isOpen ? "block" : "none" }} className="link_text">{item.name}</div>

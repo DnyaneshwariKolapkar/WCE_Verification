@@ -10,6 +10,7 @@ const Pendingstudents = () => {
     const location = useLocation();
     const unqId = location?.state?.unqId;
     const [popup, Setpopup] = useState(false);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -19,7 +20,7 @@ const Pendingstudents = () => {
                     unqId: unqId,
                 }, {
                     headers: {
-                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                        "Authorization": `Bearer ${user.token}`
                     }
                 })
                 if (response.status === 200) {
@@ -38,7 +39,7 @@ const Pendingstudents = () => {
                 unqId: unqId,
             }, {
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    "Authorization": `Bearer ${user.token}`
                 }
             })
             if (response.status === 200) {
@@ -53,7 +54,7 @@ const Pendingstudents = () => {
         try {
             const response = await axios.post('http://localhost:5000/verification/admin/verify', { unqId: unqId }, {
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                    "Authorization": `Bearer ${user.token}`
                 }
             })
             if (response.status === 200) {
@@ -73,7 +74,7 @@ const Pendingstudents = () => {
                     unqId: unqId,
                 }, {
                     headers: {
-                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                        "Authorization": `Bearer ${user.token}`
                     }
                 })
             }

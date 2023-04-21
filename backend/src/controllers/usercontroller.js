@@ -46,7 +46,7 @@ exports.login = trycatch(async (req, res) => {
     res.status(200).json({
         status: 'success',
         message: 'User logged in successfully',
-        token
+        user: user,
     });
 });
 
@@ -54,6 +54,7 @@ exports.login = trycatch(async (req, res) => {
 // ------------ POST REQUEST : /verification/admin/createuser ------------ //
 
 exports.createUser = trycatch(async (req, res) => {
+    console.log(req.body);
     if (req.user.role !== 'admin') {
         throw new Error('Unauthorized');
     }

@@ -16,6 +16,7 @@ import Pendingstudents from './pages/pendingstudents'
 import DocView from './pages/DocView'
 
 const Router = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
     return (
         <>
 
@@ -43,7 +44,7 @@ const Router = () => {
 
                     <Route path="analytics" element={<Analytics />} />
 
-                    <Route path="manageuser" element={<ManageUser />} />
+                    {user && user.role === 'admin' && <Route path="manageuser" element={<ManageUser />} />}
 
                 </Route>
                 <Route path="*" element= {<Insrtuctions /> } />

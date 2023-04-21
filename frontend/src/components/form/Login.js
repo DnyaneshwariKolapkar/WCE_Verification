@@ -6,7 +6,7 @@ import { Images } from "../../context/images"
 
 
 const Login = () => {
-  if (localStorage.getItem('token')) {
+  if (localStorage.getItem('user')) {
     window.location.href = '/sidebar';
   }
   const [email, setEmail] = React.useState('');
@@ -22,7 +22,7 @@ const Login = () => {
         const res = await axios.post('http://localhost:5000/verification/login', user);
         console.log(res.data);
         if (res.status === 200) {
-          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('user', JSON.stringify(res.data.user));
           alert("Login Successfull");
           navigate('/sidebar');
         }
