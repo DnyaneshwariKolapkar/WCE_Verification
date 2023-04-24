@@ -14,6 +14,7 @@ import ForgotPassword from './components/form/ForgotPassword'
 import ResetPassword from './components/form/ResetPassword'
 import Pendingstudents from './pages/pendingstudents'
 import DocView from './pages/DocView'
+import StudentsInfo from './pages/StudentsInfo'
 
 const Router = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -39,6 +40,8 @@ const Router = () => {
                     <Route path="allreq" element={<Allreq />} />
                     <Route path="allreq/pendingstudents" element={<Pendingstudents />} />
                     <Route path="allreq/pendingstudents/view" element={<DocView />} />
+
+                    <Route path="studentsinfo" element={<StudentsInfo />} />
 
                     <Route path="transactions" element={<Transactions />} />
 

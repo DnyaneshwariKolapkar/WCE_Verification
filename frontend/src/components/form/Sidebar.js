@@ -7,7 +7,8 @@ import {
     FaRupeeSign,
     FaHistory,
     FaSignOutAlt,
-    FaArrowLeft    
+    FaArrowLeft,
+    FaUserGraduate
 } from "react-icons/fa";
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
@@ -33,19 +34,19 @@ const Sidebar = () => {
             icon: <FaHistory />
         },
         {
+            path: "studentsinfo",
+            name: "Students",
+            icon: <FaUserGraduate />
+        },
+        {
             path: "analytics",
             name: "Report",
             icon: <FaRegChartBar />
         },
-        {
+        { 
             path: "transactions",
             name: "Transactions",
             icon: <FaRupeeSign />
-        },
-        {
-            path: "manageuser",
-            name: "Manage User",
-            icon: <FaUserAlt />
         },
         {
             path: "/login",
@@ -54,10 +55,10 @@ const Sidebar = () => {
         }
     ]
 
-    if (user && user.role !== 'admin') {
-        // remove manage user from menu
-        menuItem[4] = menuItem[5];
-        menuItem.pop();
+    if (user && user.role === "admin") {
+        const temp = menuItem[5];
+        menuItem[5] = { path: "manageuser", name: "Manage User", icon: <FaUserAlt /> };
+        menuItem.push(temp);
     }
 
     return (

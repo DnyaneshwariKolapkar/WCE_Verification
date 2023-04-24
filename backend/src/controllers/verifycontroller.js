@@ -113,6 +113,7 @@ exports.verifyStudent = trycatch(async (req, res) => {
     student.name = req.body.name;
     student.prn = req.body.prn;
     student.passingYear = req.body.passingYear;
+    student.branch = req.body.branch;
 
     await student.save();
     res.status(200).json({

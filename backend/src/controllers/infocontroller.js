@@ -26,6 +26,7 @@ exports.upload = multer({
 // ------------ POST REQUEST : /verification/insertstudent ------------ //
 
 exports.insertStudentInfo = trycatch(async (req, res) => {
+    console.log(req.body);
     const { prn, name, grade, passingYear, branch } = req.body;
     const student = new StudentInfo({
         prn,
@@ -77,7 +78,7 @@ exports.getStudentInfo = trycatch(async (req, res) => {
 });
 
 
-// ------------ GET REQUEST : /verification/admin/getallstudentsinfo ------------ //
+// ------------ GET REQUEST : /verification/admin/getstudentinfoall ------------ //
 
 exports.getAllStudentsInfo = trycatch(async (req, res) => {
     const students = await StudentInfo.find();
