@@ -49,7 +49,7 @@ const transporter = nodeMailer.createTransport({
     }
 });
 
-const sendEmail = (id, email) => {
+const sendEmail = async (id, email) => {
     try {
         const mailOptions = {
             from: process.env.EMAIL,
@@ -66,11 +66,11 @@ const sendEmail = (id, email) => {
             ]
         };
 
-        const info = transporter.sendMail(mailOptions);
+        const info = await transporter.sendMail(mailOptions);
+        console.log(info);
         return info;
     } catch (error) {
-        console.log(error);
-        return 'data';
+        return null;
     }
 }     
 
@@ -90,7 +90,7 @@ exports.verify = trycatch(async (req, res) => {
     await company.save();
     res.status(200).json({
         status: "success",
-        data: company
+        message: `Email sent to ${company.orgEmail}`
     });
 });
 

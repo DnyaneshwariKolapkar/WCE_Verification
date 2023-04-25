@@ -4,6 +4,8 @@ import DocViewer from "@cyntler/react-doc-viewer";
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaTimes } from 'react-icons/fa';
+import { SuccessToast, ErrorToast } from '../components/toaster';
+import { ToastContainer } from 'react-toastify';
 
 const Pendingstudents = () => {
     const navigate = useNavigate();
@@ -57,13 +59,14 @@ const Pendingstudents = () => {
                     "Authorization": `Bearer ${user.token}`
                 }
             })
+
             if (response.status === 200) {
-                alert("Company verified successfully");
+                SuccessToast({ message: response.data.message, isNavigate: false });
+                Setpopup(false);
             }
         }
         catch (error) {
-            console.log(error)
-            alert("Company not verified");
+            ErrorToast({ message: error.response.data.message });
         }
     }
 
@@ -89,6 +92,7 @@ const Pendingstudents = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className="container-table">
                 <ul className="responsive-table">
                     <li className="table-header">
@@ -101,7 +105,7 @@ const Pendingstudents = () => {
                             <li className="table-row" onClick={() => navigate('view', { state: { documents: data[index].documents, id: data[index]._id } })} key={index}>
                                 <div className="col col-1" data-label="Sr no">{index + 1}</div>
                                 <div className="col col-2" data-label="Student Name">{item.name}</div>
-                                {item.status === 'pending' ? <div className="col col-3" data-label="Status" style={{ color: 'yellow' }}>{item.status}</div> : null}
+                                {item.status === 'pending' ? <div className="col col-3" data-label="Status" style={{ color: '#FDA348' }}>{item.status}</div> : null}
                                 {item.status === 'approved' ? <div className="col col-3" data-label="Status" style={{ color: 'green' }}>{item.status}</div> : null}
                                 {item.status === 'rejected' ? <div className="col col-3" data-label="Status" style={{ color: 'red' }}>{item.status}</div> : null}
                             </li>

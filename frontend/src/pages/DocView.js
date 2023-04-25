@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import DocViewer from "@cyntler/react-doc-viewer";
 import {
     FaSearch
 } from "react-icons/fa";
+import { ToastContainer } from 'react-toastify';
+import { SuccessToast, ErrorToast, WarningToast, InfoToast } from '../components/toaster';
 
 
 const DocView = () => {
     const [prn, setPrn] = React.useState("");
-    const [show, setShow] = React.useState(false);
+    const [show, setShow] = React.useState([false, ""]);
     const [student, setStudent] = React.useState({});
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -33,37 +35,72 @@ const DocView = () => {
                     }
                 );
                 if (response.status === 200) {
+                    SuccessToast({ message: response.data.message, isNavigation: false });
                     setStudent(response.data.data);
-                    setShow(true);
-                    alert("Student found");
+                    setShow([true, "Update"]);
                 }
                 else {
-                    alert("Student not found");
+                    ErrorToast({ message: response.data.message });
                 }
 
             }
             else {
-                alert("Please enter PRN");
+                WarningToast({ message: "Please enter PRN" });
             }
 
         } catch (error) {
-            console.log(error);
-            alert("something went wrong");
+            console.log(error.response.data.message);
+            ErrorToast({ message: error.response.data.message });
+            setStudent({
+                prn: "",
+                name: "",
+                branch: "",
+                passingYear: "",
+                grade: [0, 0, 0, 0, 0, 0, 0, 0]
+            });
+            setShow([true, "Insert"]);
         }
     }
-    useEffect(() => {
-    })
+
+    const createStudent = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/verification/admin/insertstudentinfo', {
+                name: student.name,
+                prn: student.prn,
+                branch: student.branch,
+                passingYear: student.passingYear,
+                grade: student.grade
+            }, {
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                }
+            });
+            if (response.status === 201) {
+                InfoToast({ message: 'Student created successfully' });
+                setStudent({
+                    prn: "",
+                    name: "",
+                    branch: "",
+                    passingYear: "",
+                    grade: [0, 0, 0, 0, 0, 0, 0, 0]
+                });
+                setShow([false, ""]);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const verifyButton = async (status) => {
         try {
             if (prn) {
                 const response = await axios.post(`http://localhost:5000/verification/admin/verifystudent/${status}`,
-                    { 
+                    {
                         id: id,
                         prn: student.prn,
                         name: student.name,
                         branch: student.branch,
-                        passingYear: student.passingYear                 
+                        passingYear: student.passingYear
                     },
                     {
                         headers: {
@@ -72,17 +109,16 @@ const DocView = () => {
                     }
                 );
                 if (response.status === 200) {
-                    alert(`Student ${status}`);
+                    InfoToast({ message: `Student ${status}` });
                 }
                 else {
-                    alert("student not found");
+                    ErrorToast({ message: response.data.message });
                 }
 
             }
 
         } catch (error) {
-            console.log(error);
-            alert("something went wrong");
+            ErrorToast({ message: error.response.data.message });
         }
     }
 
@@ -98,17 +134,17 @@ const DocView = () => {
                     }
                 );
                 if (response.status === 200) {
-                    alert(`Student updated`);
+                    SuccessToast({ message: response.data.message, isNavigation: false });
+                    setShow([false, ""]);
                 }
             }
 
         } catch (error) {
             if (error.response.status === 404) {
-                alert("PRN is fixed and cannot be changed");
+                ErrorToast({ message: error.response.data.message });
             }
             else {
-                console.log(error);
-                alert("something went wrong");
+                ErrorToast({ message: error.response.data.message });
             }
         }
     }
@@ -116,6 +152,7 @@ const DocView = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className='doc-container'>
                 <div className="container" >
                     <div className="row">
@@ -146,9 +183,14 @@ const DocView = () => {
                         <br />
                     </div>
                     {
-                        show ?
+                        show[0] ?
                             <>
-                                <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={updateButton}>Update</button>
+                                {
+                                    show[1] === "Insert" ?
+                                    <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={createStudent}>{show[1]}</button>
+                                    :
+                                    <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={updateButton}>{show[1]}</button>
+                                }
                                 <br />
                                 <br />
                                 <br />

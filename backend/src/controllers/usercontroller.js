@@ -30,7 +30,7 @@ const search = async (email, password) => {
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        throw new Error('Password is incorrect');
+        throw new Error('Invalid credentials');
     }
     return user;
 };

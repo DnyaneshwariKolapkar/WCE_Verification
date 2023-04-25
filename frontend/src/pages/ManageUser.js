@@ -2,6 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaTrash, FaEdit, FaTimes, FaPlus } from 'react-icons/fa';
+import { ToastContainer } from 'react-toastify';
+import { InfoToast } from '../components/toaster';
 
 const ManageUser = () => {
     const [Users, setUsers] = useState([]);
@@ -43,7 +45,7 @@ const ManageUser = () => {
                 }
             });
             if (response.status === 200) {
-                alert('User deleted successfully');
+                InfoToast({message: 'User deleted successfully'});
                 fetchData();
             }
         } catch (error) {
@@ -62,9 +64,10 @@ const ManageUser = () => {
                 }
             });
             if (response.status === 200) {
-                alert('User updated successfully');
-                fetchData();
                 setEdit([false, '']);
+                setPassword('');
+                InfoToast({message: 'User updated successfully'});
+                fetchData();
             }
         } catch (error) {
             console.log(error);
@@ -82,7 +85,7 @@ const ManageUser = () => {
                 }
             });
             if (response.status === 200) {
-                alert('User created successfully');
+                InfoToast({message: 'User created successfully'});
                 fetchData();
                 setCreate(false);
             }
@@ -93,6 +96,7 @@ const ManageUser = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className="container-table">
                 <ul className="responsive-table">
                     <li className="table-header">

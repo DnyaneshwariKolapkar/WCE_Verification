@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaTrash, FaEdit, FaTimes, FaPlus } from 'react-icons/fa';
+import { FaTrash, FaEdit, FaTimes, FaPlus, FaUpload } from 'react-icons/fa';
+import { ToastContainer } from 'react-toastify';
+import { InfoToast } from '../components/toaster';
 
 const ManageStudents = () => {
     const [Students, setStudents] = useState([]);
@@ -14,9 +16,8 @@ const ManageStudents = () => {
         passingYear: '',
         grade: []
     });
+    const [file, setFile] = useState([false, null]);
 
-
-    const [password, setPassword] = useState('');
     const user = JSON.parse(localStorage.getItem('user'));
 
     const fetchData = async () => {
@@ -48,7 +49,7 @@ const ManageStudents = () => {
                 }
             });
             if (response.status === 200) {
-                alert('Student deleted successfully');
+                InfoToast({ message: 'Student deleted successfully' });
                 fetchData();
             }
         } catch (error) {
@@ -70,7 +71,7 @@ const ManageStudents = () => {
                 }
             });
             if (response.status === 200) {
-                alert('Student updated successfully');
+                InfoToast({ message: 'Student updated successfully' });
                 fetchData();
                 setEdit([false, '']);
             }
@@ -93,7 +94,7 @@ const ManageStudents = () => {
                 }
             });
             if (response.status === 201) {
-                alert('Student created successfully');
+                InfoToast({ message: 'Student created successfully' });
                 fetchData();
                 setCreate(false);
             }
@@ -102,8 +103,29 @@ const ManageStudents = () => {
         }
     }
 
+    const insertFile = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('file', file[1]);
+            const response = await axios.post('http://localhost:5000/verification/admin/insertmultiplestudentinfo', formData, {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            if (response.status === 201) {
+                InfoToast({ message: 'Students created successfully' });
+                fetchData();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     return (
         <>
+            <ToastContainer />
             <div className="container-table">
                 <ul className="responsive-table">
                     <li className="table-header">
@@ -133,13 +155,36 @@ const ManageStudents = () => {
                 {/* <button className="btn"
                     style={{cursor: "pointer", float: "right", borderRadius:"40px" }} ><i className="fa fa-plus"></i>
                 </button> */}
+                {/* take only csv files */}
+
+                <button className="btn" style={{ backgroundColor: "#222E3C", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={() => setFile([true, ''])}>
+                    Upload File
+                </button>
                 <FaPlus className="btn_circle_normal"
                     onClick={() => setCreate(true)}
-                    style={{ border: "none", cursor: "pointer", float: "right", marginRight: "40px", fontSize: "40px" }}
+                    style={{ border: "none", cursor: "pointer", float: "right", marginRight: "40px", fontSize: "40px", marginTop: "5px" }}
                     title='Create User'
-                >
-                </FaPlus>
+                />
             </div>
+
+            {
+                file[0] === true &&
+                <div div className="popup" style={{ display: "block", justifyContent: "center" }}>
+                    <button>
+                        <FaTimes className='btn_circle' style={{ top: "10px", left: "5px" }} onClick={() => setFile([false, ''])} />
+                    </button>
+                    <br />
+                    <br />
+                    <br />
+                    <input type="file" onChange={(e) => setFile([true, e.target.files[0]])} accept=".csv, xlsx, .xls" id="file" name='file' style={{ marginLeft: "10px" }} />
+                    <button className="btn"
+                        style={{ backgroundColor: "#222E3C", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", float: "right", marginRight: "10px", marginBottom: "10px" }}
+                        onClick={() => insertFile()}>
+                        Submit
+                    </button>
+                </div>
+
+            }
 
             {
                 edit[0] === true &&
@@ -322,7 +367,7 @@ const ManageStudents = () => {
                         </table>
                     </div>
                     <br />
-                    <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={() => createStudent()}> Add Student </button> 
+                    <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={() => createStudent()}> Add Student </button>
                 </div>
             }
 

@@ -3,6 +3,10 @@ import '../../assets/style.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Images } from "../../context/images"
+import { ToastContainer } from 'react-toastify';
+import { SuccessToast, ErrorToast, WarningToast } from '../toaster';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = () => {
@@ -23,28 +27,28 @@ const Login = () => {
         console.log(res.data);
         if (res.status === 200) {
           localStorage.setItem('user', JSON.stringify(res.data.user));
-          alert("Login Successfull");
-          navigate('/sidebar');
+          SuccessToast({ message: res.data.message, isNavigate: true, navigate: navigate, path: '/sidebar' });
         }
         else {
-          console.log(res);
+          ErrorToast({ message: res.data.message });
         }
       }
       else {
-        alert("Please enter all fields");
+        WarningToast({ message: "Please fill all the fields" });
       }
 
     } catch (error) {
-      console.log(error);
-
+      ErrorToast({ message: error.response.data.message });
     }
   }
+
 
 
 
   const navigate = useNavigate();
   return (
     <>
+      <ToastContainer />
       <div className='Header'>
         <img
           src={Images.logoImage}

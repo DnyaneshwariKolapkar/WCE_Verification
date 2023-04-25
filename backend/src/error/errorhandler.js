@@ -16,24 +16,52 @@ exports.errorHandler = (err, req, res, next) => {
         });
     }
 
-    if (err.message === "Link expired") {
+    else if (err.message === "Link expired") {
         return res.status(401).json({
             error: err.message,
             message: "Link expired",
         });
     }
 
-    if (err.message === "Invalid tag") {
+    else if (err.message === "Invalid tag") {
         return res.status(400).json({
             error: err.message,
             message: "Invalid tag",
         });
     }
 
-    if (err.message === "Student not found") {
+    else if (err.message === "Student not found") {
         return res.status(404).json({
             error: err.message,
             message: "Student not found",
+        });
+    }
+
+    else if (err.message === "User not found") {
+        return res.status(404).json({
+            error: err.message,
+            message: "User not found",
+        });
+    }
+
+    else if (err.message === "Invalid credentials") {
+        return res.status(401).json({
+            error: err.message,
+            message: "Invalid credentials",
+        });
+    }
+
+    else if (err.message === "Company not found") {
+        return res.status(404).json({
+            error: err.message,
+            message: "Company not found",
+        });
+    }
+
+    else if (err.message === "Email not sent") {
+        return res.status(400).json({
+            error: err.message,
+            message: "Email not sent",
         });
     }
 

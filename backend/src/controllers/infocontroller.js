@@ -47,17 +47,19 @@ exports.insertStudentInfo = trycatch(async (req, res) => {
 
 exports.insertMultipleStudentInfo = trycatch(async (req, res) => {
     const xlData = readStudentInfo(req.file.buffer);
+    console.log(xlData);
     for (let i = 0; i < xlData.length; i++) {
-        const grade = [xlData[i].grades1, xlData[i].grades2, xlData[i].grades3, xlData[i].grades4, xlData[i].grades5, xlData[i].grades6, xlData[i].grades7, xlData[i].grades8];
+        const grade = [xlData[i].sgpa1, xlData[i].sgpa2, xlData[i].sgpa3, xlData[i].sgpa4, xlData[i].sgpa5, xlData[i].sgpa6, xlData[i].sgpa7, xlData[i].sgpa8];
         const student = new StudentInfo({
-            prn: xlData[i].prn,
-            name: xlData[i].name,
-            passingYear: xlData[i].passingYear,
-            branch: xlData[i].branch,
+            prn: xlData[i].PRN,
+            name: xlData[i].Name,
+            passingYear: xlData[i].PassoutYear,
+            branch: xlData[i].Department,
             grade: grade
         });
         await student.save();
     }
+
     res.status(201).json({
         status: 'success',
         message: 'Student info inserted successfully'
@@ -70,6 +72,9 @@ exports.insertMultipleStudentInfo = trycatch(async (req, res) => {
 exports.getStudentInfo = trycatch(async (req, res) => {
     const prn = req.body.prn;
     const student = await StudentInfo.findOne({ prn });
+    if (!student) {
+        throw new Error('Student not found');
+    }
     res.status(200).json({
         status: 'success',
         message: 'Student fetched successfully',
