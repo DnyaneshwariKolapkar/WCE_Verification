@@ -206,7 +206,12 @@ const ManageStudents = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th style={{ background: "#222E3C" }}>PRN</th>
+                                    <th style={{ background: "#222E3C" }}>
+                                        <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }}>
+                                            <option value="">PRN</option>
+                                            <option value="">Seat no</option>
+                                        </select>
+                                    </th>
                                     <td>
                                         <input type="text" value={edit[1]?.prn} onChange={(e) => setEdit([true, { ...edit[1], prn: e.target.value }])}></input>
                                     </td>
@@ -245,7 +250,12 @@ const ManageStudents = () => {
                             </thead>
                             <tbody>
                                 <tr style={{ backgroundColor: "#F8F8F8" }}>
-                                    <td>CGPA</td>
+                                    <td>
+                                        <select>
+                                            <option value="">CGPA</option>
+                                            <option value="">% Marks</option>
+                                        </select>
+                                    </td>
                                     <td>
                                         <input type="text" value={edit[1]?.grade[0]} style={{ width: "30px" }} onChange={(e) => setEdit([true, { ...edit[1], grade: [e.target.value, edit[1]?.grade[1], edit[1]?.grade[2], edit[1]?.grade[3], edit[1]?.grade[4], edit[1]?.grade[5], edit[1]?.grade[6], edit[1]?.grade[7]] }])} />
                                     </td>
@@ -298,7 +308,12 @@ const ManageStudents = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th style={{ background: "#222E3C" }}>PRN</th>
+                                    <th style={{ background: "#222E3C" }}>
+                                        <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }}>
+                                            <option value="">PRN</option>
+                                            <option value="">Seat no</option>
+                                        </select>
+                                    </th>
                                     <td>
                                         <input type="text" value={newStudent?.prn} onChange={(e) => setNewStudent({ ...newStudent, prn: e.target.value })}></input>
                                     </td>
@@ -337,7 +352,12 @@ const ManageStudents = () => {
                             </thead>
                             <tbody>
                                 <tr style={{ backgroundColor: "#F8F8F8" }}>
-                                    <td>CGPA</td>
+                                    <td>
+                                        <select>
+                                            <option value="">CGPA</option>
+                                            <option value="">% Marks</option>
+                                        </select>
+                                    </td>
                                     <td>
                                         <input type="text" value={newStudent?.grade[0]} style={{ width: "30px" }} onChange={(e) => setNewStudent({ ...newStudent, grade: [e.target.value, newStudent?.grade[1], newStudent?.grade[2], newStudent?.grade[3], newStudent?.grade[4], newStudent?.grade[5], newStudent?.grade[6], newStudent?.grade[7]] })} />
                                     </td>
