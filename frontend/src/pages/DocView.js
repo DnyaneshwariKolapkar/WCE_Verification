@@ -204,7 +204,12 @@ const DocView = () => {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th style={{ background: "#222E3C" }}>PRN</th>
+                                                <th style={{ background: "#222E3C" }}>
+                                                    <select style={{ background: "#222E3C" , color:"white",fontSize:"bold", boxSizing:"none"}}>
+                                                        <option value="">PRN</option>
+                                                        <option value="">Seat no</option>
+                                                    </select>
+                                                </th>
                                                 <td>
                                                     <input type="text" value={student?.prn} onChange={(e) => setStudent({ ...student, prn: e.target.value })}></input>
                                                 </td>
@@ -216,7 +221,7 @@ const DocView = () => {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Passing Year</th>
+                                                <th style={{ background: "#222E3C" }}>Passing Year</th>
                                                 <td>
                                                     <input type="text" value={student?.passingYear} onChange={(e) => setStudent({ ...student, passingYear: e.target.value })}></input>
                                                 </td>
@@ -243,30 +248,35 @@ const DocView = () => {
                                         </thead>
                                         <tbody>
                                             <tr style={{ backgroundColor: "#F8F8F8" }}>
-                                                <td>CGPA</td>
                                                 <td>
-                                                    <input type="text" value={student?.grade[0]} style={{ width: "30px" }} onChange={(e) => setStudent({ ...student, grade: [e.target.value, student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
+                                                    <select>
+                                                        <option value="">CGPA</option>
+                                                        <option value="">% Marks</option>
+                                                    </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={student?.grade[1]} style={{ width: "30px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], e.target.value, student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
+                                                    <input type="text" value={student?.grade[0]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [e.target.value, student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={student?.grade[2]} style={{ width: "30px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], e.target.value, student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
+                                                    <input type="text" value={student?.grade[1]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], e.target.value, student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={student?.grade[3]} style={{ width: "30px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], e.target.value, student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
+                                                    <input type="text" value={student?.grade[2]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], e.target.value, student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={student?.grade[4]} style={{ width: "30px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], e.target.value, student?.grade[5], student?.grade[6], student?.grade[7]] })} />
+                                                    <input type="text" value={student?.grade[3]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], e.target.value, student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={student?.grade[5]} style={{ width: "30px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], e.target.value, student?.grade[6], student?.grade[7]] })} />
+                                                    <input type="text" value={student?.grade[4]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], e.target.value, student?.grade[5], student?.grade[6], student?.grade[7]] })} />
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={student?.grade[6]} style={{ width: "30px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], e.target.value, student?.grade[7]] })} />
+                                                    <input type="text" value={student?.grade[5]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], e.target.value, student?.grade[6], student?.grade[7]] })} />
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={student?.grade[7]} style={{ width: "30px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], e.target.value] })} />
+                                                    <input type="text" value={student?.grade[6]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], e.target.value, student?.grade[7]] })} />
+                                                </td>
+                                                <td>
+                                                    <input type="text" value={student?.grade[7]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], e.target.value] })} />
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -278,7 +288,6 @@ const DocView = () => {
                                 <br />
                                 <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("approved")}>Verify</button>
                                 <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("rejected")}>Reject</button>
-                                <br />
                                 <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "150px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} >View certificate</button>
                             </>
                             : null

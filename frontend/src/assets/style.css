@@ -530,8 +530,8 @@ textarea {
 
 @media (max-width: 767px) {
     .fl-table {
-        display: block;
-        width: 100%;
+        /* display: block; */
+        max-width: 200px;
     }
     .table-wrapper:before{
         content: "Scroll horizontally >";
@@ -563,7 +563,7 @@ textarea {
         overflow-x: hidden;
         overflow-y: auto;
         width: 120px;
-        font-size: 13px;
+        font-size: 10.5px;
         text-overflow: ellipsis;
     }
     .fl-table thead th {
@@ -590,6 +590,13 @@ textarea {
         display: block;
         text-align: center;
     }
+   
+}
+
+@media (max-width:450px){
+  .f1-table td input[type="text"] {
+    width: 20%;
+}
 }
 
 .container-sidebar{
