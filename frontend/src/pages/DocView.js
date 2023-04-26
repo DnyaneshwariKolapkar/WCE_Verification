@@ -56,7 +56,10 @@ const DocView = () => {
                 name: "",
                 branch: "",
                 passingYear: "",
-                grade: [0, 0, 0, 0, 0, 0, 0, 0]
+                grade: [0, 0, 0, 0, 0, 0, 0, 0],
+                finalGrade: "",
+                qualification: "",
+                fields: ["PRN", "CGPA"]
             });
             setShow([true, "Insert"]);
         }
@@ -69,7 +72,10 @@ const DocView = () => {
                 prn: student.prn,
                 branch: student.branch,
                 passingYear: student.passingYear,
-                grade: student.grade
+                grade: student.grade,
+                finalGrade: student.finalGrade,
+                qualification: student.qualification,
+                fields: student.fields                
             }, {
                 headers: {
                     Authorization: `Bearer ${user.token}`
@@ -82,7 +88,10 @@ const DocView = () => {
                     name: "",
                     branch: "",
                     passingYear: "",
-                    grade: [0, 0, 0, 0, 0, 0, 0, 0]
+                    grade: [0, 0, 0, 0, 0, 0, 0, 0],
+                    finalGrade: "",
+                    qualification: "",
+                    fields: ["PRN", "CGPA"]
                 });
                 setShow([false, ""]);
             }
@@ -100,7 +109,10 @@ const DocView = () => {
                         prn: student.prn,
                         name: student.name,
                         branch: student.branch,
-                        passingYear: student.passingYear
+                        passingYear: student.passingYear,
+                        finalGrade: student.finalGrade,
+                        qualification: student.qualification,
+                        fields: student.fields
                     },
                     {
                         headers: {
@@ -135,7 +147,17 @@ const DocView = () => {
                 );
                 if (response.status === 200) {
                     SuccessToast({ message: response.data.message, isNavigation: false });
-                    setShow([false, ""]);
+                    // setShow([false, ""]);
+                    setStudent({
+                        prn: "",
+                        name: "",
+                        branch: "",
+                        passingYear: "",
+                        grade: [0, 0, 0, 0, 0, 0, 0, 0],
+                        finalGrade: "",
+                        qualification: "",
+                        fields: ["PRN", "CGPA"]
+                    });
                 }
             }
 
@@ -148,6 +170,7 @@ const DocView = () => {
             }
         }
     }
+    console.log(student);   
 
 
     return (
@@ -205,9 +228,9 @@ const DocView = () => {
                                             </tr>
                                             <tr>
                                                 <th style={{ background: "#222E3C" }}>
-                                                    <select style={{ background: "#222E3C" , color:"white",fontSize:"bold", boxSizing:"none"}}>
-                                                        <option value="">PRN</option>
-                                                        <option value="">Seat no</option>
+                                                    <select style={{ background: "#222E3C" , color:"white",fontSize:"bold", boxSizing:"none"}} onChange={(e) => setStudent({ ...student, fields: [e.target.value, student.fields[1]] })} value={student.fields[0]}>
+                                                        <option value="PRN">PRN</option>
+                                                        <option value="Seat No">Seat No</option>
                                                     </select>
                                                 </th>
                                                 <td>
@@ -224,6 +247,18 @@ const DocView = () => {
                                                 <th style={{ background: "#222E3C" }}>Passing Year</th>
                                                 <td>
                                                     <input type="text" value={student?.passingYear} onChange={(e) => setStudent({ ...student, passingYear: e.target.value })}></input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Final Grade</th>
+                                                <td>
+                                                    <input type="text" value={student?.finalGrade} onChange={(e) => setStudent({ ...student, finalGrade: e.target.value })}></input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style={{ background: "#222E3C" }}>Qualification</th>
+                                                <td>
+                                                    <input type="text" value={student?.qualification} onChange={(e) => setStudent({ ...student, qualification: e.target.value })}></input>
                                                 </td>
                                             </tr>
                                         </thead>
@@ -249,9 +284,9 @@ const DocView = () => {
                                         <tbody>
                                             <tr style={{ backgroundColor: "#F8F8F8" }}>
                                                 <td>
-                                                    <select>
-                                                        <option value="">CGPA</option>
-                                                        <option value="">% Marks</option>
+                                                    <select onChange={(e) => setStudent({ ...student, fields: [student.fields[0], e.target.value] })} value={student?.fields[1]}>
+                                                        <option value="CGPA">CGPA</option>
+                                                        <option value="Percentage">Percentage</option>
                                                     </select>
                                                 </td>
                                                 <td>

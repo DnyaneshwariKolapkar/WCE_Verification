@@ -7,14 +7,26 @@ import { InfoToast } from '../components/toaster';
 
 const ManageStudents = () => {
     const [Students, setStudents] = useState([]);
-    const [edit, setEdit] = useState([false, {}]);
+    const [edit, setEdit] = useState([false, {
+        prn: '',
+        name: '',
+        branch: '',
+        passingYear: '',
+        grade: [],
+        finalGrade: '',
+        qualification: '',
+        fields: ["PRN", "CGPA"]
+    }]);
     const [create, setCreate] = useState(false);
     const [newStudent, setNewStudent] = useState({
         prn: '',
         name: '',
         branch: '',
         passingYear: '',
-        grade: []
+        grade: [],
+        finalGrade: '',
+        qualification: '',
+        fields: ["PRN", "CGPA"]
     });
     const [file, setFile] = useState([false, null]);
 
@@ -64,7 +76,10 @@ const ManageStudents = () => {
                 name: edit[1].name,
                 branch: edit[1].branch,
                 passingYear: edit[1].passingYear,
-                grade: edit[1].grade
+                grade: edit[1].grade,
+                finalGrade: edit[1].finalGrade,
+                qualification: edit[1].qualification,
+                fields: edit[1].fields
             }, {
                 headers: {
                     Authorization: `Bearer ${user.token}`
@@ -87,7 +102,10 @@ const ManageStudents = () => {
                 prn: newStudent.prn,
                 branch: newStudent.branch,
                 passingYear: newStudent.passingYear,
-                grade: newStudent.grade
+                grade: newStudent.grade,
+                finalGrade: newStudent.finalGrade,
+                qualification: newStudent.qualification,
+                fields: newStudent.fields
             }, {
                 headers: {
                     Authorization: `Bearer ${user.token}`
@@ -96,6 +114,16 @@ const ManageStudents = () => {
             if (response.status === 201) {
                 InfoToast({ message: 'Student created successfully' });
                 fetchData();
+                setNewStudent({
+                    prn: '',
+                    name: '',
+                    branch: '',
+                    passingYear: '',
+                    grade: [],
+                    finalGrade: '',
+                    qualification: '',
+                    fields: ["PRN", "CGPA"]
+                });
                 setCreate(false);
             }
         } catch (error) {
@@ -207,9 +235,9 @@ const ManageStudents = () => {
                                 </tr>
                                 <tr>
                                     <th style={{ background: "#222E3C" }}>
-                                        <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }}>
-                                            <option value="">PRN</option>
-                                            <option value="">Seat no</option>
+                                        <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onChange={(e) => setEdit([true, { ...edit[1], fields: [e.target.value, edit[1]?.fields[1]] }])} value={edit[1]?.fields[0]}>
+                                            <option value="PRN">PRN</option>
+                                            <option value="Seat No">Seat No</option>
                                         </select>
                                     </th>
                                     <td>
@@ -226,6 +254,18 @@ const ManageStudents = () => {
                                     <th style={{ background: "#222E3C" }}>Passing Year</th>
                                     <td>
                                         <input type="text" value={edit[1]?.passingYear} onChange={(e) => setEdit([true, { ...edit[1], passingYear: e.target.value }])}></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style={{ background: "#222E3C" }}>Final Grade</th>
+                                    <td>
+                                        <input type="text" value={edit[1]?.finalGrade} onChange={(e) => setEdit([true, { ...edit[1], finalGrade: e.target.value }])}></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style={{ background: "#222E3C" }}>Qualification</th>
+                                    <td>
+                                        <input type="text" value={edit[1]?.qualification} onChange={(e) => setEdit([true, { ...edit[1], qualification: e.target.value }])}></input>
                                     </td>
                                 </tr>
                             </thead>
@@ -251,9 +291,9 @@ const ManageStudents = () => {
                             <tbody>
                                 <tr style={{ backgroundColor: "#F8F8F8" }}>
                                     <td>
-                                        <select>
-                                            <option value="">CGPA</option>
-                                            <option value="">% Marks</option>
+                                        <select onChange={(e) => setEdit([true, { ...edit[1], fields: [edit[1]?.fields[0], e.target.value] }])} value={edit[1]?.fields[1]}>
+                                            <option value="CGPA">CGPA</option>
+                                            <option value="Percentage">Percentage</option>
                                         </select>
                                     </td>
                                     <td>
@@ -309,9 +349,9 @@ const ManageStudents = () => {
                                 </tr>
                                 <tr>
                                     <th style={{ background: "#222E3C" }}>
-                                        <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }}>
-                                            <option value="">PRN</option>
-                                            <option value="">Seat no</option>
+                                        <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onChange={(e) => setNewStudent({ ...newStudent, fields: [e.target.value, newStudent?.fields[1]] })} value={newStudent?.fields[0]}>
+                                            <option value="PRN">PRN</option>
+                                            <option value="Seat No">Seat No</option>
                                         </select>
                                     </th>
                                     <td>
@@ -353,9 +393,9 @@ const ManageStudents = () => {
                             <tbody>
                                 <tr style={{ backgroundColor: "#F8F8F8" }}>
                                     <td>
-                                        <select>
-                                            <option value="">CGPA</option>
-                                            <option value="">% Marks</option>
+                                        <select onClick={(e) => setNewStudent({...newStudent, fields: [newStudent?.fields[0], e.target.value]})} value={newStudent?.fields[1]} >
+                                            <option value="CGPA">CGPA</option>
+                                            <option value="Percentage">Percentage</option>
                                         </select>
                                     </td>
                                     <td>

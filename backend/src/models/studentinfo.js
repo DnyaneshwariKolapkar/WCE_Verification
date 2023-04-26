@@ -23,10 +23,24 @@ const studentSchema = new Schema({
         type: [String],
         required: [true, 'Grade is required'],
     },
+    finalGrade: {
+        type: String,
+        required: [true, 'Final grade is required'],
+    },
+    qualification: {
+        type: String,
+        enum: ['B.E/B.Tech', 'M.E/M.Tech'],
+        required: [true, 'Qualification is required'],
+    },
+    fields: {
+        type: [String],
+        required: [true, 'Fields is required'],
+    },
     isVerified: {
         type: Boolean,
         default: false,
     },
+    
 });
 
 const StudentInfo = mongoose.model('StudentInfo', studentSchema);

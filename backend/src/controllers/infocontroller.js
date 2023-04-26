@@ -27,13 +27,16 @@ exports.upload = multer({
 
 exports.insertStudentInfo = trycatch(async (req, res) => {
     console.log(req.body);
-    const { prn, name, grade, passingYear, branch } = req.body;
+    const { prn, name, grade, passingYear, branch, finalGrade, qualification, fields } = req.body; 
     const student = new StudentInfo({
         prn,
         name,
         passingYear,
         branch,
-        grade
+        grade,
+        finalGrade,
+        qualification,
+        fields
     });
     await student.save();
     res.status(201).json({
@@ -47,15 +50,18 @@ exports.insertStudentInfo = trycatch(async (req, res) => {
 
 exports.insertMultipleStudentInfo = trycatch(async (req, res) => {
     const xlData = readStudentInfo(req.file.buffer);
-    console.log(xlData);
+    const fields = req.body.fields;
     for (let i = 0; i < xlData.length; i++) {
-        const grade = [xlData[i].sgpa1, xlData[i].sgpa2, xlData[i].sgpa3, xlData[i].sgpa4, xlData[i].sgpa5, xlData[i].sgpa6, xlData[i].sgpa7, xlData[i].sgpa8];
+        const grade = [xlData[i].grade1, xlData[i].grade2, xlData[i].grade3, xlData[i].grade4, xlData[i].grade5, xlData[i].grade6, xlData[i].grade7, xlData[i].grade8];
         const student = new StudentInfo({
             prn: xlData[i].PRN,
             name: xlData[i].Name,
             passingYear: xlData[i].PassoutYear,
             branch: xlData[i].Department,
-            grade: grade
+            grade: grade,
+            finalGrade: xlData[i].FinalGrade,
+            qualification: xlData[i].Qualification,
+            fields: ["PRN", "CGPA"]
         });
         await student.save();
     }
@@ -98,6 +104,7 @@ exports.getAllStudentsInfo = trycatch(async (req, res) => {
 // ------------ POST REQUEST : /verification/admin/updatestudentinfo ------------ //
 
 exports.updateStudentInfo = trycatch(async (req, res) => {
+    console.log(req.body);
     const prn = req.body.prn;
     const student = await StudentInfo.findOne({ prn });
     if (!student) {
@@ -107,6 +114,10 @@ exports.updateStudentInfo = trycatch(async (req, res) => {
     student.branch = req.body.branch;
     student.passingYear = req.body.passingYear;
     student.grade = req.body.grade;
+    student.finalGrade = req.body.finalGrade;
+    student.qualification = req.body.qualification;
+    student.fields = req.body.fields;
+    
     await student.save();
     res.status(200).json({
         status: 'success',
