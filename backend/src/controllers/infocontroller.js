@@ -27,13 +27,12 @@ exports.upload = multer({
 
 exports.insertStudentInfo = trycatch(async (req, res) => {
     console.log(req.body);
-    const { prn, name, grade, passingYear, branch, finalGrade, qualification, fields } = req.body; 
+    const { prn, name, passingYear, branch, finalGrade, qualification, fields } = req.body; 
     const student = new StudentInfo({
         prn,
         name,
         passingYear,
         branch,
-        grade,
         finalGrade,
         qualification,
         fields
@@ -52,13 +51,11 @@ exports.insertMultipleStudentInfo = trycatch(async (req, res) => {
     const xlData = readStudentInfo(req.file.buffer);
     const fields = req.body.fields;
     for (let i = 0; i < xlData.length; i++) {
-        const grade = [xlData[i].grade1, xlData[i].grade2, xlData[i].grade3, xlData[i].grade4, xlData[i].grade5, xlData[i].grade6, xlData[i].grade7, xlData[i].grade8];
         const student = new StudentInfo({
             prn: xlData[i].PRN,
             name: xlData[i].Name,
             passingYear: xlData[i].PassoutYear,
             branch: xlData[i].Department,
-            grade: grade,
             finalGrade: xlData[i].FinalGrade,
             qualification: xlData[i].Qualification,
             fields: ["PRN", "CGPA"]
@@ -113,7 +110,6 @@ exports.updateStudentInfo = trycatch(async (req, res) => {
     student.name = req.body.name;
     student.branch = req.body.branch;
     student.passingYear = req.body.passingYear;
-    student.grade = req.body.grade;
     student.finalGrade = req.body.finalGrade;
     student.qualification = req.body.qualification;
     student.fields = req.body.fields;

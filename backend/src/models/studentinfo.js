@@ -19,17 +19,13 @@ const studentSchema = new Schema({
         type: String,
         required: [true, 'Passing year is required'],
     },
-    grade: {
-        type: [String],
-        required: [true, 'Grade is required'],
-    },
     finalGrade: {
         type: String,
         required: [true, 'Final grade is required'],
     },
     qualification: {
         type: String,
-        enum: ['B.E/B.Tech', 'M.E/M.Tech'],
+        enum: ['B.Tech', 'B.E', 'M.Tech', 'M.E'],
         required: [true, 'Qualification is required'],
     },
     fields: {

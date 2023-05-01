@@ -8,6 +8,18 @@ import {
 import { ToastContainer } from 'react-toastify';
 import { SuccessToast, ErrorToast, WarningToast, InfoToast } from '../components/toaster';
 
+const StaticDocView = React.memo(({ docs }) => {
+    return (
+        <DocViewer
+            documents={docs}
+            config={{
+                header: {
+                    disableFileName: true,
+                },
+            }}
+        />
+    )
+});
 
 const DocView = () => {
     const [prn, setPrn] = React.useState("");
@@ -18,10 +30,13 @@ const DocView = () => {
     const location = useLocation();
     const id = location?.state?.id;
     const documents = location?.state?.documents;
-    var docs = [];
-    for (let i = 0; i < documents.length; i++) {
-        docs.push({ uri: `http://localhost:5000/document/${documents[i]}` })
-    }
+    const [docs, setDocs] = React.useState([])
+
+    React.useEffect(() => {
+        for (let i = 0; i < documents.length; i++) {
+            setDocs((prev) => [...prev, { uri: `http://localhost:5000/document/${documents[i]}` }])
+        }
+    }, [documents])
 
     const searchButton = async () => {
         try {
@@ -56,7 +71,6 @@ const DocView = () => {
                 name: "",
                 branch: "",
                 passingYear: "",
-                grade: [0, 0, 0, 0, 0, 0, 0, 0],
                 finalGrade: "",
                 qualification: "",
                 fields: ["PRN", "CGPA"]
@@ -72,10 +86,9 @@ const DocView = () => {
                 prn: student.prn,
                 branch: student.branch,
                 passingYear: student.passingYear,
-                grade: student.grade,
                 finalGrade: student.finalGrade,
                 qualification: student.qualification,
-                fields: student.fields                
+                fields: student.fields
             }, {
                 headers: {
                     Authorization: `Bearer ${user.token}`
@@ -88,7 +101,6 @@ const DocView = () => {
                     name: "",
                     branch: "",
                     passingYear: "",
-                    grade: [0, 0, 0, 0, 0, 0, 0, 0],
                     finalGrade: "",
                     qualification: "",
                     fields: ["PRN", "CGPA"]
@@ -153,7 +165,6 @@ const DocView = () => {
                         name: "",
                         branch: "",
                         passingYear: "",
-                        grade: [0, 0, 0, 0, 0, 0, 0, 0],
                         finalGrade: "",
                         qualification: "",
                         fields: ["PRN", "CGPA"]
@@ -170,7 +181,7 @@ const DocView = () => {
             }
         }
     }
-    console.log(student);   
+    console.log(student);
 
 
     return (
@@ -180,26 +191,19 @@ const DocView = () => {
                 <div className="container" >
                     <div className="row">
                         <div className="col-12">
-                            <DocViewer
-                                documents={docs}
-                                config={{
-                                    header: {
-                                        disableFileName: true,
-                                    },
-                                }}
-                            />
+                            <StaticDocView docs={docs} />
                         </div>
                     </div>
                 </div>
                 <div className='container'>
                     <div>
                         <input type="text"
-                            style={{ width: "90%", borderSize: "1px solid #ccc", borderRadius: "0px", padding: "8px 15px", margin: "8px 0", boxSizing: "border-box" }}
+                            style={{ width: "90%", borderSize: "1px solid #ccc", borderRadius: "6px", padding: "8px 15px", margin: "8px 0", boxSizing: "border-box" }}
                             className='searchtext'
                             placeholder="Enter PRN"
                             value={prn}
                             onChange={(e) => setPrn(e.target.value)} />
-                        <button className='searchButton' onClick={searchButton}>
+                        <button className='btn_circle_normal' style={{ maxWidth: "8%", margin: "8px 0", float: "right", fontSize: "25px" }} onClick={searchButton}>
                             <FaSearch />
                         </button>
                         <br />
@@ -210,9 +214,9 @@ const DocView = () => {
                             <>
                                 {
                                     show[1] === "Insert" ?
-                                    <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={createStudent}>{show[1]}</button>
-                                    :
-                                    <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={updateButton}>{show[1]}</button>
+                                        <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={createStudent}>{show[1]}</button>
+                                        :
+                                        <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={updateButton}>{show[1]}</button>
                                 }
                                 <br />
                                 <br />
@@ -228,7 +232,7 @@ const DocView = () => {
                                             </tr>
                                             <tr>
                                                 <th style={{ background: "#222E3C" }}>
-                                                    <select style={{ background: "#222E3C" , color:"white",fontSize:"bold", boxSizing:"none"}} onChange={(e) => setStudent({ ...student, fields: [e.target.value, student.fields[1]] })} value={student.fields[0]}>
+                                                    <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onChange={(e) => setStudent({ ...student, fields: [e.target.value, student.fields[1]] })} value={student.fields[0]}>
                                                         <option value="PRN">PRN</option>
                                                         <option value="Seat No">Seat No</option>
                                                     </select>
@@ -250,7 +254,12 @@ const DocView = () => {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Final Grade</th>
+                                                <th>
+                                                    <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onChange={(e) => setStudent({ ...student, fields: [student.fields[0], e.target.value] })} value={student?.fields[1]}>
+                                                        <option value="CGPA">CGPA</option>
+                                                        <option value="% Marks">% Marks</option>
+                                                    </select>
+                                                </th>
                                                 <td>
                                                     <input type="text" value={student?.finalGrade} onChange={(e) => setStudent({ ...student, finalGrade: e.target.value })}></input>
                                                 </td>
@@ -266,64 +275,11 @@ const DocView = () => {
                                     <br />
                                     <br />
                                     <br />
-                                    <br />
-                                    <table className="fl-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Semester</th>
-                                                <th>Sem-1</th>
-                                                <th>Sem-2</th>
-                                                <th>Sem-3</th>
-                                                <th>Sem-4</th>
-                                                <th>Sem-5</th>
-                                                <th>Sem-6</th>
-                                                <th>Sem-7</th>
-                                                <th>Sem-8</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr style={{ backgroundColor: "#F8F8F8" }}>
-                                                <td>
-                                                    <select onChange={(e) => setStudent({ ...student, fields: [student.fields[0], e.target.value] })} value={student?.fields[1]}>
-                                                        <option value="CGPA">CGPA</option>
-                                                        <option value="Percentage">Percentage</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <input type="text" value={student?.grade[0]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [e.target.value, student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
-                                                </td>
-                                                <td>
-                                                    <input type="text" value={student?.grade[1]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], e.target.value, student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
-                                                </td>
-                                                <td>
-                                                    <input type="text" value={student?.grade[2]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], e.target.value, student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
-                                                </td>
-                                                <td>
-                                                    <input type="text" value={student?.grade[3]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], e.target.value, student?.grade[4], student?.grade[5], student?.grade[6], student?.grade[7]] })} />
-                                                </td>
-                                                <td>
-                                                    <input type="text" value={student?.grade[4]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], e.target.value, student?.grade[5], student?.grade[6], student?.grade[7]] })} />
-                                                </td>
-                                                <td>
-                                                    <input type="text" value={student?.grade[5]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], e.target.value, student?.grade[6], student?.grade[7]] })} />
-                                                </td>
-                                                <td>
-                                                    <input type="text" value={student?.grade[6]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], e.target.value, student?.grade[7]] })} />
-                                                </td>
-                                                <td>
-                                                    <input type="text" value={student?.grade[7]} style={{ width: "35px" }} onChange={(e) => setStudent({ ...student, grade: [student?.grade[0], student?.grade[1], student?.grade[2], student?.grade[3], student?.grade[4], student?.grade[5], student?.grade[6], e.target.value] })} />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br />
-                                    <br />
-                                    <br />
                                 </div>
                                 <br />
-                                <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("approved")}>Verify</button>
-                                <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("rejected")}>Reject</button>
-                                <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "150px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} >View certificate</button>
+                                <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("valid")}>Verify</button>
+                                <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer" }} onClick={() => verifyButton("invalid")}>Reject</button>
+                                {/* <button style={{ width: "30%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "150px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} >View certificate</button> */}
                             </>
                             : null
                     }

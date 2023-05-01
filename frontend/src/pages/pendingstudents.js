@@ -106,8 +106,8 @@ const Pendingstudents = () => {
                                 <div className="col col-1" data-label="Sr no">{index + 1}</div>
                                 <div className="col col-2" data-label="Student Name">{item.name}</div>
                                 {item.status === 'pending' ? <div className="col col-3" data-label="Status" style={{ color: '#FDA348' }}>{item.status}</div> : null}
-                                {item.status === 'approved' ? <div className="col col-3" data-label="Status" style={{ color: 'green' }}>{item.status}</div> : null}
-                                {item.status === 'rejected' ? <div className="col col-3" data-label="Status" style={{ color: 'red' }}>{item.status}</div> : null}
+                                {item.status === 'valid' ? <div className="col col-3" data-label="Status" style={{ color: 'green' }}>{item.status}</div> : null}
+                                {item.status === 'invalid' ? <div className="col col-3" data-label="Status" style={{ color: 'red' }}>{item.status}</div> : null}
                             </li>
                         )
                     })}
@@ -122,7 +122,7 @@ const Pendingstudents = () => {
                     popup === true &&
                     <div className="popup">
                         <button>
-                            <FaTimes className='btn_circle' onClick={() => Setpopup(false)} />
+                            <FaTimes className='btn_circle' style={{ top: "10px", left: "5px" }} onClick={() => Setpopup(false)} />
                         </button>
                         <DocViewer
                             documents={[

@@ -12,7 +12,6 @@ const ManageStudents = () => {
         name: '',
         branch: '',
         passingYear: '',
-        grade: [],
         finalGrade: '',
         qualification: '',
         fields: ["PRN", "CGPA"]
@@ -23,7 +22,6 @@ const ManageStudents = () => {
         name: '',
         branch: '',
         passingYear: '',
-        grade: [],
         finalGrade: '',
         qualification: '',
         fields: ["PRN", "CGPA"]
@@ -76,7 +74,6 @@ const ManageStudents = () => {
                 name: edit[1].name,
                 branch: edit[1].branch,
                 passingYear: edit[1].passingYear,
-                grade: edit[1].grade,
                 finalGrade: edit[1].finalGrade,
                 qualification: edit[1].qualification,
                 fields: edit[1].fields
@@ -102,7 +99,6 @@ const ManageStudents = () => {
                 prn: newStudent.prn,
                 branch: newStudent.branch,
                 passingYear: newStudent.passingYear,
-                grade: newStudent.grade,
                 finalGrade: newStudent.finalGrade,
                 qualification: newStudent.qualification,
                 fields: newStudent.fields
@@ -119,7 +115,6 @@ const ManageStudents = () => {
                     name: '',
                     branch: '',
                     passingYear: '',
-                    grade: [],
                     finalGrade: '',
                     qualification: '',
                     fields: ["PRN", "CGPA"]
@@ -251,15 +246,20 @@ const ManageStudents = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th style={{ background: "#222E3C" }}>Passing Year</th>
+                                    <th style={{ background: "#222E3C" }}>
+                                    <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onChange={(e) => setEdit([true, { ...edit[1], fields: [edit[1]?.fields[0], e.target.value] }])} value={edit[1]?.fields[1]}>
+                                            <option value="CGPA">CGPA</option>
+                                            <option value="% Marks">% Marks</option>
+                                        </select>
+                                    </th>
                                     <td>
-                                        <input type="text" value={edit[1]?.passingYear} onChange={(e) => setEdit([true, { ...edit[1], passingYear: e.target.value }])}></input>
+                                        <input type="text" value={edit[1]?.finalGrade} onChange={(e) => setEdit([true, { ...edit[1], finalGrade: e.target.value }])}></input>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th style={{ background: "#222E3C" }}>Final Grade</th>
+                                    <th>Passing Year</th>
                                     <td>
-                                        <input type="text" value={edit[1]?.finalGrade} onChange={(e) => setEdit([true, { ...edit[1], finalGrade: e.target.value }])}></input>
+                                        <input type="text" value={edit[1]?.passingYear} onChange={(e) => setEdit([true, { ...edit[1], passingYear: e.target.value }])}></input>
                                     </td>
                                 </tr>
                                 <tr>
@@ -274,55 +274,6 @@ const ManageStudents = () => {
                         <br />
                         <br />
                         <br />
-                        <table className="fl-table">
-                            <thead>
-                                <tr>
-                                    <th>Semester</th>
-                                    <th>Sem-1</th>
-                                    <th>Sem-2</th>
-                                    <th>Sem-3</th>
-                                    <th>Sem-4</th>
-                                    <th>Sem-5</th>
-                                    <th>Sem-6</th>
-                                    <th>Sem-7</th>
-                                    <th>Sem-8</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style={{ backgroundColor: "#F8F8F8" }}>
-                                    <td>
-                                        <select onChange={(e) => setEdit([true, { ...edit[1], fields: [edit[1]?.fields[0], e.target.value] }])} value={edit[1]?.fields[1]}>
-                                            <option value="CGPA">CGPA</option>
-                                            <option value="Percentage">Percentage</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" value={edit[1]?.grade[0]} style={{ width: "30px" }} onChange={(e) => setEdit([true, { ...edit[1], grade: [e.target.value, edit[1]?.grade[1], edit[1]?.grade[2], edit[1]?.grade[3], edit[1]?.grade[4], edit[1]?.grade[5], edit[1]?.grade[6], edit[1]?.grade[7]] }])} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={edit[1]?.grade[1]} style={{ width: "30px" }} onChange={(e) => setEdit([true, { ...edit[1], grade: [edit[1]?.grade[0], e.target.value, edit[1]?.grade[2], edit[1]?.grade[3], edit[1]?.grade[4], edit[1]?.grade[5], edit[1]?.grade[6], edit[1]?.grade[7]] }])} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={edit[1]?.grade[2]} style={{ width: "30px" }} onChange={(e) => setEdit([true, { ...edit[1], grade: [edit[1]?.grade[0], edit[1]?.grade[1], e.target.value, edit[1]?.grade[3], edit[1]?.grade[4], edit[1]?.grade[5], edit[1]?.grade[6], edit[1]?.grade[7]] }])} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={edit[1]?.grade[3]} style={{ width: "30px" }} onChange={(e) => setEdit([true, { ...edit[1], grade: [edit[1]?.grade[0], edit[1]?.grade[1], edit[1]?.grade[2], e.target.value, edit[1]?.grade[4], edit[1]?.grade[5], edit[1]?.grade[6], edit[1]?.grade[7]] }])} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={edit[1]?.grade[4]} style={{ width: "30px" }} onChange={(e) => setEdit([true, { ...edit[1], grade: [edit[1]?.grade[0], edit[1]?.grade[1], edit[1]?.grade[2], edit[1]?.grade[3], e.target.value, edit[1]?.grade[5], edit[1]?.grade[6], edit[1]?.grade[7]] }])} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={edit[1]?.grade[5]} style={{ width: "30px" }} onChange={(e) => setEdit([true, { ...edit[1], grade: [edit[1]?.grade[0], edit[1]?.grade[1], edit[1]?.grade[2], edit[1]?.grade[3], edit[1]?.grade[4], e.target.value, edit[1]?.grade[6], edit[1]?.grade[7]] }])} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={edit[1]?.grade[6]} style={{ width: "30px" }} onChange={(e) => setEdit([true, { ...edit[1], grade: [edit[1]?.grade[0], edit[1]?.grade[1], edit[1]?.grade[2], edit[1]?.grade[3], edit[1]?.grade[4], edit[1]?.grade[5], e.target.value, edit[1]?.grade[7]] }])} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={edit[1]?.grade[7]} style={{ width: "30px" }} onChange={(e) => setEdit([true, { ...edit[1], grade: [edit[1]?.grade[0], edit[1]?.grade[1], edit[1]?.grade[2], edit[1]?.grade[3], edit[1]?.grade[4], edit[1]?.grade[5], edit[1]?.grade[6], e.target.value] }])} />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                     <br />
                     <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={() => updateUser()}>Update</button>
@@ -365,66 +316,35 @@ const ManageStudents = () => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th style={{ background: "#222E3C" }}>Passing Year</th>
+                                    <th style={{ background: "#222E3C" }}>
+                                    <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onClick={(e) => setNewStudent({...newStudent, fields: [newStudent?.fields[0], e.target.value]})} value={newStudent?.fields[1]} >
+                                            <option value="CGPA">CGPA</option>
+                                            <option value="% Marks">% Marks</option>
+                                        </select>
+                                    </th>
+                                    <td>
+                                        <input type="text" value={newStudent?.finalGrade} onChange={(e) => setNewStudent({ ...newStudent, finalGrade: e.target.value })}></input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Passing Year</th>
                                     <td>
                                         <input type="text" value={newStudent?.passingYear} onChange={(e) => setNewStudent({ ...newStudent, passingYear: e.target.value })}></input>
                                     </td>
                                 </tr>
-                            </thead>
-                        </table>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <table className="fl-table">
-                            <thead>
                                 <tr>
-                                    <th>Semester</th>
-                                    <th>Sem-1</th>
-                                    <th>Sem-2</th>
-                                    <th>Sem-3</th>
-                                    <th>Sem-4</th>
-                                    <th>Sem-5</th>
-                                    <th>Sem-6</th>
-                                    <th>Sem-7</th>
-                                    <th>Sem-8</th>
+                                    <th style={{ background: "#222E3C" }}>Qualification</th>
+                                    <td>
+                                        <input type="text" value={newStudent?.qualification} onChange={(e) => setNewStudent({ ...newStudent, qualification: e.target.value })}></input>
+                                    </td>
                                 </tr>
+
                             </thead>
-                            <tbody>
-                                <tr style={{ backgroundColor: "#F8F8F8" }}>
-                                    <td>
-                                        <select onClick={(e) => setNewStudent({...newStudent, fields: [newStudent?.fields[0], e.target.value]})} value={newStudent?.fields[1]} >
-                                            <option value="CGPA">CGPA</option>
-                                            <option value="Percentage">Percentage</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" value={newStudent?.grade[0]} style={{ width: "30px" }} onChange={(e) => setNewStudent({ ...newStudent, grade: [e.target.value, newStudent?.grade[1], newStudent?.grade[2], newStudent?.grade[3], newStudent?.grade[4], newStudent?.grade[5], newStudent?.grade[6], newStudent?.grade[7]] })} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={newStudent?.grade[1]} style={{ width: "30px" }} onChange={(e) => setNewStudent({ ...newStudent, grade: [newStudent?.grade[0], e.target.value, newStudent?.grade[2], newStudent?.grade[3], newStudent?.grade[4], newStudent?.grade[5], newStudent?.grade[6], newStudent?.grade[7]] })} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={newStudent?.grade[2]} style={{ width: "30px" }} onChange={(e) => setNewStudent({ ...newStudent, grade: [newStudent?.grade[0], newStudent?.grade[1], e.target.value, newStudent?.grade[3], newStudent?.grade[4], newStudent?.grade[5], newStudent?.grade[6], newStudent?.grade[7]] })} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={newStudent?.grade[3]} style={{ width: "30px" }} onChange={(e) => setNewStudent({ ...newStudent, grade: [newStudent?.grade[0], newStudent?.grade[1], newStudent?.grade[2], e.target.value, newStudent?.grade[4], newStudent?.grade[5], newStudent?.grade[6], newStudent?.grade[7]] })} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={newStudent?.grade[4]} style={{ width: "30px" }} onChange={(e) => setNewStudent({ ...newStudent, grade: [newStudent?.grade[0], newStudent?.grade[1], newStudent?.grade[2], newStudent?.grade[3], e.target.value, newStudent?.grade[5], newStudent?.grade[6], newStudent?.grade[7]] })} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={newStudent?.grade[5]} style={{ width: "30px" }} onChange={(e) => setNewStudent({ ...newStudent, grade: [newStudent?.grade[0], newStudent?.grade[1], newStudent?.grade[2], newStudent?.grade[3], newStudent?.grade[4], e.target.value, newStudent?.grade[6], newStudent?.grade[7]] })} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={newStudent?.grade[6]} style={{ width: "30px" }} onChange={(e) => setNewStudent({ ...newStudent, grade: [newStudent?.grade[0], newStudent?.grade[1], newStudent?.grade[2], newStudent?.grade[3], newStudent?.grade[4], newStudent?.grade[5], e.target.value, newStudent?.grade[7]] })} />
-                                    </td>
-                                    <td>
-                                        <input type="text" value={newStudent?.grade[7]} style={{ width: "30px" }} onChange={(e) => setNewStudent({ ...newStudent, grade: [newStudent?.grade[0], newStudent?.grade[1], newStudent?.grade[2], newStudent?.grade[3], newStudent?.grade[4], newStudent?.grade[5], newStudent?.grade[6], e.target.value] })} />
-                                    </td>
-                                </tr>
-                            </tbody>
                         </table>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                     </div>
                     <br />
                     <button style={{ width: "25%", backgroundColor: "#222E3C", color: "white", padding: "10px 15px", margin: "9px 10px", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={() => createStudent()}> Add Student </button>

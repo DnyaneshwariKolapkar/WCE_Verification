@@ -28,10 +28,26 @@ const studentSchema = new schema({
     },
     documents: {
         type: [String],
-        required: [true, "Grade Cards are required"],
+        required: [true, "Documents are required"],
+    },
+    qualification: {
+        type: String,
+        enum: ["B.Tech", "B.E", "M.Tech", "M.E", "Not Provided"],
+        required: [true, "Qualification is required"],
+        default: "Not Provided",
+    },
+    finalGrade: {
+        type: String,
+        required: [true, "Result is required"],
+        default: "Not Provided",
+    },
+    fields: {
+        type: [String],
+        required: [true, "Fields are required"],
+        default: "Not Provided",
     },
     status: {
-        enum: ["pending", "approved", "rejected"],
+        enum: ["pending", "valid", "invalid"],
         type: String,
         default: "pending",
     }

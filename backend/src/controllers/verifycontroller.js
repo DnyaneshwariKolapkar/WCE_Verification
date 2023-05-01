@@ -103,17 +103,20 @@ exports.verifyStudent = trycatch(async (req, res) => {
     if (student === null) {
         throw new Error("Student not found");
     }
-    if (status === "approved") {
-        student.status = "approved";
+    if (status === "valid") {
+        student.status = "valid";
     }
-    else if (status === "rejected") {
-        student.status = "rejected";
+    else if (status === "invalid") {
+        student.status = "invalid";
     }
     
     student.name = req.body.name;
     student.prn = req.body.prn;
     student.passingYear = req.body.passingYear;
     student.branch = req.body.branch;
+    student.qualification = req.body.qualification;
+    student.finalGrade = req.body.finalGrade;
+    student.fields = req.body.fields;
 
     await student.save();
     res.status(200).json({
@@ -149,15 +152,18 @@ exports.getpdf = trycatch(async (req, res) => {
         return data;
     });
     html = html.split("{{name}}").join(data.name);
+    html = html.split("{{address}}").join(company.orgAddress);
+    html = html.split("{{prn}}").join(data.students[0].prn);
     let studentrows = "";
     for (let i = 0; i < data.students.length; i++) {
         studentrows += `<tr>
             <td>${i + 1}</td>
             <td>${data.students[i].name}</td>
-            <td>B. Tech</td>
+            <td>${data.students[i].qualification}</td>
+            <td>${data.students[i].branch}</td>
             <td>${data.students[i].prn}</td>
             <td>${data.students[i].passingYear}</td>
-            <td>10</td>
+            <td>${data.students[i].finalGrade}</td>
             <td>${data.students[i].status}</td>
         </tr>`;
     }
