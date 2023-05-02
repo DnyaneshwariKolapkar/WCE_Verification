@@ -242,12 +242,21 @@ const ManageStudents = () => {
                                 <tr>
                                     <th>Branch</th>
                                     <td>
-                                        <input type="text" value={edit[1]?.branch} onChange={(e) => setEdit([true, { ...edit[1], branch: e.target.value }])}></input>
+                                        {/* <input type="text" value={edit[1]?.branch} onChange={(e) => setEdit([true, { ...edit[1], branch: e.target.value }])}></input> */}
+                                        <select style={{ width: "61%" }} onChange={(e) => setEdit([true, { ...edit[1], branch: e.target.value }])} value={edit[1]?.branch}>
+                                            <option value="Computer Science">Computer Science</option>
+                                            <option value="Information Technology">Information Technology</option>
+                                            <option value="Electronics Engineering">Electronics Engineering</option>
+                                            <option value="Electrical Engineering">Electrical Engineering</option>
+                                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                            <option value="Civil Engineering">Civil Engineering</option>
+                                        </select>
+
                                     </td>
                                 </tr>
                                 <tr>
                                     <th style={{ background: "#222E3C" }}>
-                                    <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onChange={(e) => setEdit([true, { ...edit[1], fields: [edit[1]?.fields[0], e.target.value] }])} value={edit[1]?.fields[1]}>
+                                        <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onChange={(e) => setEdit([true, { ...edit[1], fields: [edit[1]?.fields[0], e.target.value] }])} value={edit[1]?.fields[1]}>
                                             <option value="CGPA">CGPA</option>
                                             <option value="% Marks">% Marks</option>
                                         </select>
@@ -265,7 +274,13 @@ const ManageStudents = () => {
                                 <tr>
                                     <th style={{ background: "#222E3C" }}>Qualification</th>
                                     <td>
-                                        <input type="text" value={edit[1]?.qualification} onChange={(e) => setEdit([true, { ...edit[1], qualification: e.target.value }])}></input>
+                                        {/* <input type="text" value={edit[1]?.qualification} onChange={(e) => setEdit([true, { ...edit[1], qualification: e.target.value }])}></input> */}
+                                        <select style={{ width: "61%" }} onChange={(e) => setEdit([true, { ...edit[1], qualification: e.target.value }])} value={edit[1]?.qualification}>
+                                            <option value="B.E">B.E</option>
+                                            <option value="M.E">M.E</option>
+                                            <option value="B.Tech">B.Tech</option>
+                                            <option value="M.Tech">M.Tech</option>
+                                        </select>
                                     </td>
                                 </tr>
                             </thead>
@@ -312,12 +327,20 @@ const ManageStudents = () => {
                                 <tr>
                                     <th>Branch</th>
                                     <td>
-                                        <input type="text" value={newStudent?.branch} onChange={(e) => setNewStudent({ ...newStudent, branch: e.target.value })}></input>
+                                        {/* <input type="text" value={newStudent?.branch} onChange={(e) => setNewStudent({ ...newStudent, branch: e.target.value })}></input> */}
+                                        <select style={{ width: "61%" }} onChange={(e) => setNewStudent({ ...newStudent, branch: e.target.value })} value={newStudent?.branch}>
+                                            <option value="Computer Science">Computer Science</option>
+                                            <option value="Information Technology">Information Technology</option>
+                                            <option value="Electronics Engineering">Electronics Engineering</option>
+                                            <option value="Electrical Engineering">Electrical Engineering</option>
+                                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                            <option value="Civil Engineering">Civil Engineering</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th style={{ background: "#222E3C" }}>
-                                    <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onClick={(e) => setNewStudent({...newStudent, fields: [newStudent?.fields[0], e.target.value]})} value={newStudent?.fields[1]} >
+                                        <select style={{ background: "#222E3C", color: "white", fontSize: "bold", boxSizing: "none" }} onClick={(e) => setNewStudent({ ...newStudent, fields: [newStudent?.fields[0], e.target.value] })} value={newStudent?.fields[1]} >
                                             <option value="CGPA">CGPA</option>
                                             <option value="% Marks">% Marks</option>
                                         </select>
@@ -335,7 +358,13 @@ const ManageStudents = () => {
                                 <tr>
                                     <th style={{ background: "#222E3C" }}>Qualification</th>
                                     <td>
-                                        <input type="text" value={newStudent?.qualification} onChange={(e) => setNewStudent({ ...newStudent, qualification: e.target.value })}></input>
+                                        {/* <input type="text" value={newStudent?.qualification} onChange={(e) => setNewStudent({ ...newStudent, qualification: e.target.value })}></input> */}
+                                        <select style={{ width: "61%" }} onChange={(e) => setNewStudent({ ...newStudent, qualification: e.target.value })} value={newStudent?.qualification}>
+                                            <option value="B.E">B.E</option>
+                                            <option value="M.E">M.E</option>
+                                            <option value="B.Tech">B.Tech</option>
+                                            <option value="M.Tech">M.Tech</option>
+                                        </select>
                                     </td>
                                 </tr>
 

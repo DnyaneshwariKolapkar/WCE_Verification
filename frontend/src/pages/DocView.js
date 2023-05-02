@@ -244,7 +244,15 @@ const DocView = () => {
                                             <tr>
                                                 <th>Branch</th>
                                                 <td>
-                                                    <input type="text" value={student?.branch} onChange={(e) => setStudent({ ...student, branch: e.target.value })}></input>
+                                                    {/* <input type="text" value={student?.branch} onChange={(e) => setStudent({ ...student, branch: e.target.value })}></input> */}
+                                                    <select style={{width: "57%"}} onChange={(e) => setStudent({ ...student, branch: e.target.value })} value={student.branch}>
+                                                        <option value="Computer Science">Computer Science</option>
+                                                        <option value="Information Technology">Information Technology</option>
+                                                        <option value="Electronics Engineering">Electronics Engineering</option>
+                                                        <option value="Electrical Engineering">Electrical Engineering</option>
+                                                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                                        <option value="Civil Engineering">Civil Engineering</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -267,7 +275,13 @@ const DocView = () => {
                                             <tr>
                                                 <th style={{ background: "#222E3C" }}>Qualification</th>
                                                 <td>
-                                                    <input type="text" value={student?.qualification} onChange={(e) => setStudent({ ...student, qualification: e.target.value })}></input>
+                                                    {/* <input type="text" value={student?.qualification} onChange={(e) => setStudent({ ...student, qualification: e.target.value })}></input> */}
+                                                    <select style={{width: "57%"}} onChange={(e) => setStudent({ ...student, qualification: e.target.value })} value={student.qualification}>
+                                                        <option value="B.E">B.E</option>
+                                                        <option value="M.E">M.E</option>
+                                                        <option value="B.Tech">B.Tech</option>
+                                                        <option value="M.Tech">M.Tech</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                         </thead>
