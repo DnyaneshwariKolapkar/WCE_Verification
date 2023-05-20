@@ -133,7 +133,12 @@ const DocView = () => {
                     }
                 );
                 if (response.status === 200) {
-                    InfoToast({ message: `Student ${status}` });
+                    if (status === "valid") {
+                        SuccessToast({ message: "Student verified successfully", isNavigation: false });
+                    }
+                    else if (status === "invalid") {
+                        ErrorToast({ message: "Student rejected successfully", isNavigation: false });
+                    }
                 }
                 else {
                     ErrorToast({ message: response.data.message });
