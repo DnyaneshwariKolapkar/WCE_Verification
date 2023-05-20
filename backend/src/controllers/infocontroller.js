@@ -49,7 +49,6 @@ exports.insertStudentInfo = trycatch(async (req, res) => {
 
 exports.insertMultipleStudentInfo = trycatch(async (req, res) => {
     const xlData = readStudentInfo(req.file.buffer);
-    const fields = req.body.fields;
     for (let i = 0; i < xlData.length; i++) {
         const student = new StudentInfo({
             prn: xlData[i].PRN,
@@ -58,7 +57,7 @@ exports.insertMultipleStudentInfo = trycatch(async (req, res) => {
             branch: xlData[i].Department,
             finalGrade: xlData[i].FinalGrade,
             qualification: xlData[i].Qualification,
-            fields: ["PRN", "CGPA"]
+            fields: [xlData[i].SeatNumberType, xlData[i].GradeType]
         });
         await student.save();
     }
@@ -66,6 +65,41 @@ exports.insertMultipleStudentInfo = trycatch(async (req, res) => {
     res.status(201).json({
         status: 'success',
         message: 'Student info inserted successfully'
+    });
+});
+
+
+// ------------ POST REQUEST : /verification/admin/updatemultiplestudentinfo ------------ //
+
+exports.updateMultipleStudentInfo = trycatch(async (req, res) => {
+    const xlData = readStudentInfo(req.file.buffer);
+    for (let i = 0; i < xlData.length; i++) {
+        let student = await StudentInfo.findOne({ prn: xlData[i].PRN });
+        if (!student) {
+            student = new StudentInfo({
+                prn: xlData[i].PRN,
+                name: xlData[i].Name,
+                passingYear: xlData[i].PassoutYear,
+                branch: xlData[i].Department,
+                finalGrade: xlData[i].FinalGrade,
+                qualification: xlData[i].Qualification,
+                fields: [xlData[i].SeatNumberType, xlData[i].GradeType]
+            });
+
+            await student.save();
+        }
+        student.name = xlData[i].Name;
+        student.passingYear = xlData[i].PassoutYear;
+        student.branch = xlData[i].Department;
+        student.finalGrade = xlData[i].FinalGrade;
+        student.qualification = xlData[i].Qualification;
+        student.fields = [xlData[i].SeatNumberType, xlData[i].GradeType];
+        await student.save();
+    }
+
+    res.status(200).json({
+        status: 'success',
+        message: 'Student info updated successfully'
     });
 });
 

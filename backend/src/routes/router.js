@@ -114,6 +114,13 @@ router.post(
 );
 
 router.post(
+    '/verification/admin/updatemultiplestudentinfo',
+    userController.auth,
+    infocontroller.upload.single('file'),
+    infocontroller.updateMultipleStudentInfo
+)
+
+router.post(
     '/verification/admin/getstudentinfo',
     userController.auth,
     infocontroller.getStudentInfo

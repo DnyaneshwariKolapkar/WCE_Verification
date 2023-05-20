@@ -26,7 +26,8 @@ const ManageStudents = () => {
         qualification: '',
         fields: ["PRN", "CGPA"]
     });
-    const [file, setFile] = useState([false, null]);
+    const [file, setFile] = useState([false, null, "insert"]);
+    console.log(file);
 
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -130,16 +131,31 @@ const ManageStudents = () => {
         try {
             const formData = new FormData();
             formData.append('file', file[1]);
-            const response = await axios.post('http://localhost:5000/verification/admin/insertmultiplestudentinfo', formData, {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                    'Content-Type': 'multipart/form-data'
+            if (file[2] === "insert") {
+                const response = await axios.post('http://localhost:5000/verification/admin/insertmultiplestudentinfo', formData, {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                if (response.status === 201) {
+                    InfoToast({ message: 'Students created successfully' });
+                    fetchData();
                 }
-            });
-            if (response.status === 201) {
-                InfoToast({ message: 'Students created successfully' });
-                fetchData();
             }
+            else if (file[2] === "update") {
+                const response = await axios.post('http://localhost:5000/verification/admin/updatemultiplestudentinfo', formData, {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                if (response.status === 200) {
+                    InfoToast({ message: 'Students updated successfully' });
+                    fetchData();
+                }
+            }
+
         } catch (error) {
             console.log(error);
         }
@@ -180,7 +196,7 @@ const ManageStudents = () => {
                 </button> */}
                 {/* take only csv files */}
 
-                <button className="btn" style={{ backgroundColor: "#222E3C", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={() => setFile([true, ''])}>
+                <button className="btn" style={{ backgroundColor: "#222E3C", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", float: "right" }} onClick={() => setFile([true, '', file[2]])}>
                     Upload File
                 </button>
                 <FaPlus className="btn_circle_normal"
@@ -194,12 +210,16 @@ const ManageStudents = () => {
                 file[0] === true &&
                 <div div className="popup" style={{ display: "block", justifyContent: "center" }}>
                     <button>
-                        <FaTimes className='btn_circle' style={{ top: "10px", left: "5px" }} onClick={() => setFile([false, ''])} />
+                        <FaTimes className='btn_circle' style={{ top: "10px", left: "5px" }} onClick={() => setFile([false, '', "insert"])} />
                     </button>
                     <br />
                     <br />
                     <br />
-                    <input type="file" onChange={(e) => setFile([true, e.target.files[0]])} accept=".csv, xlsx, .xls" id="file" name='file' style={{ marginLeft: "10px" }} />
+                    <select style={{ width: "61%", height: "40px", margin: "10px", padding: "5px" }} onChange={(e) => setFile([file[0], file[1], e.target.value])}>
+                        <option value="insert">Insert New Students</option>
+                        <option value="update">Update Previous List</option>
+                    </select>
+                    <input type="file" onChange={(e) => setFile([file[0], e.target.files[0], file[2]])} accept=".csv, xlsx, .xls" id="file" name='file' style={{ marginLeft: "10px" }} />
                     <button className="btn"
                         style={{ backgroundColor: "#222E3C", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", float: "right", marginRight: "10px", marginBottom: "10px" }}
                         onClick={() => insertFile()}>
