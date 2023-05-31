@@ -34,6 +34,27 @@
 - **Frontend** - ReactJS
 - **Backend** - NodeJS, ExpressJS, MongoDB
 
+## Flowchart
+
+![Flowchart](https://github.com/DnyaneshwariKolapkar/WCE_Verification/blob/main/SS/flow.png)
+
+## Screenshots
+
+### User Side
+
+![User Side](https://github.com/DnyaneshwariKolapkar/WCE_Verification/blob/main/SS/uIns.jpeg)
+
+![User Side](https://github.com/DnyaneshwariKolapkar/WCE_Verification/blob/main/SS/uForm.jpeg)
+
+### Admin Side
+
+![Admin Side](https://github.com/DnyaneshwariKolapkar/WCE_Verification/blob/main/SS/aReq.jpeg)
+
+![Admin Side](https://github.com/DnyaneshwariKolapkar/WCE_Verification/blob/main/SS/aVerify.jpeg)
+
+![Admin Side](https://github.com/DnyaneshwariKolapkar/WCE_Verification/blob/main/SS/aStuList.jpeg)
+
+![Admin Side](https://github.com/DnyaneshwariKolapkar/WCE_Verification/blob/main/SS/acer.jpeg)
 
 
 
